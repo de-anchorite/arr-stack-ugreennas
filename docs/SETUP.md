@@ -194,7 +194,7 @@ Gluetun supports 30+ VPN providers. Configuration varies by provider.
    VPN_COUNTRIES=United Kingdom
    ```
 
-> **Note:** `VPN_COUNTRIES` in your `.env` maps to Gluetun's `SERVER_COUNTRIES` variable internally. We use the clearer name in `.env`.
+> **Note:** `VPN_COUNTRIES` in your `.env` maps to Gluetun's `SERVER_COUNTRIES` env var (a fixed name we can't change). We use the clearer name in `.env`.
 
 </details>
 
