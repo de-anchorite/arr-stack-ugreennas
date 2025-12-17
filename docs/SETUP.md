@@ -468,15 +468,16 @@ docker exec gluetun wget -qO- ifconfig.me
 
 **Network-wide ad-blocking:** Set your router's DHCP DNS to your host IP.
 
-### 5.9 Security: Enable Authentication
+### 5.9 Security Checklist
 
-**Critical for external access:** Many services default to no authentication.
+Double-check you've secured your services (especially if using external access):
 
-| Service | Location | Set To |
-|---------|----------|--------|
-| Sonarr/Radarr/Prowlarr | Settings → General → Security | Authentication: Forms, Required: Enabled |
-| Bazarr | Settings → General → Security | Authentication: Forms |
-| qBittorrent | Tools → Options → Web UI | Disable "Bypass for localhost" |
+| Service | Check |
+|---------|-------|
+| Sonarr/Radarr/Prowlarr | Authentication: Forms + Required: Enabled |
+| Bazarr | Authentication: Forms enabled |
+| qBittorrent | "Bypass for localhost" disabled, password changed |
+| Uptime Kuma | Admin account created |
 
 ---
 
@@ -491,7 +492,7 @@ docker exec qbittorrent wget -qO- ifconfig.me
 
 ### Service Integration Test
 1. Sonarr/Radarr: Settings → Download Clients → Test
-2. Add a TV show or movie → verify it appears in qBittorrent
+2. Add a TV show or movie you have rights to → verify it appears in qBittorrent
 3. After download completes → verify it moves to library
 4. Jellyfin → verify media appears in library
 
