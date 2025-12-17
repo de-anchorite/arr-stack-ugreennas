@@ -60,7 +60,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
     restart: unless-stopped
     logging: *default-logging
 
@@ -85,7 +85,7 @@ services:
       - WIREGUARD_PRIVATE_KEY=${SURFSHARK_PRIVATE_KEY}
       - WIREGUARD_ADDRESSES=${SURFSHARK_WG_ADDRESS}
       - SERVER_COUNTRIES=${VPN_COUNTRIES:-United Kingdom}
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
       - DNS_ADDRESS=192.168.100.5
       - FIREWALL_OUTBOUND_SUBNETS=192.168.0.0/24,192.168.100.0/24,10.8.1.0/24
     ports:
@@ -120,7 +120,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
       - WEBUI_PORT=8085
       - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
     volumes:
@@ -150,7 +150,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
     volumes:
       - sonarr-config:/config
       - /volume1/Media/tv:/tv
@@ -178,7 +178,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
     volumes:
       - prowlarr-config:/config
     labels:
@@ -204,7 +204,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
     volumes:
       - radarr-config:/config
       - /volume1/Media/movies:/movies
@@ -230,7 +230,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}  # Get from https://plex.tv/claim (expires in 4 mins)
     volumes:
@@ -266,7 +266,7 @@ services:
       vpn-net:
         ipv4_address: 10.8.1.200
     environment:
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
       - FTLCONF_webserver_api_password=${PIHOLE_UI_PASS}
       - FTLCONF_dns_listeningMode=all
     volumes:
@@ -299,7 +299,7 @@ services:
       - PASSWORD_HASH=${WG_PASSWORD_HASH}
       - WG_DEFAULT_ADDRESS=10.8.0.x
       - WG_DEFAULT_DNS=10.8.1.200
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
     volumes:
       - wireguard-easy-config:/etc/wireguard
     labels:
@@ -337,7 +337,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
     networks:
       traefik-proxy:
         ipv4_address: 192.168.100.8
@@ -365,7 +365,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
     networks:
       traefik-proxy:
         ipv4_address: 192.168.100.9
@@ -392,7 +392,7 @@ services:
     container_name: flaresolverr
     environment:
       - LOG_LEVEL=info
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
     networks:
       traefik-proxy:
         ipv4_address: 192.168.100.10
@@ -414,7 +414,7 @@ services:
     ports:
       - "3001:3001"  # Local network access
     environment:
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
     networks:
       traefik-proxy:
         ipv4_address: 192.168.100.13

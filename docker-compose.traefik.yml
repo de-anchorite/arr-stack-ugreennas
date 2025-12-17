@@ -16,7 +16,7 @@ services:
       - "9090:8080" # Traefik Dashboard
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
-      - TZ=Europe/London
+      - TZ=${TZ:-Europe/London}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik/traefik.yml:/traefik.yml:ro
