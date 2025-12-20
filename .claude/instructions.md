@@ -67,7 +67,7 @@ docker compose -f docker-compose.arr-stack.yml up -d <service>
 
 ## Service Networking
 
-VPN services (Sonarr, Radarr, Prowlarr, qBittorrent) use `network_mode: service:gluetun`.
+VPN services (Sonarr, Radarr, Prowlarr, qBittorrent, SABnzbd) use `network_mode: service:gluetun`.
 
 | Route | Use |
 |-------|-----|
@@ -75,7 +75,23 @@ VPN services (Sonarr, Radarr, Prowlarr, qBittorrent) use `network_mode: service:
 | Non-VPN → VPN (Jellyseerr → Sonarr) | `gluetun` |
 | Any → Non-VPN (Any → Jellyfin) | container name |
 
-**Download client config**: Sonarr/Radarr → qBittorrent: Host=`localhost`, Port=`8085` (they share Gluetun's network).
+**Download client config**: Sonarr/Radarr → qBittorrent: Host=`localhost`, Port=`8085`. SABnzbd: Host=`localhost`, Port=`8080`.
+
+**CRITICAL: When restarting gluetun, always recreate ALL dependent services.** Docker stores the actual container ID at creation time. If gluetun is recreated but dependents aren't, they point to a stale/non-existent network namespace and `localhost` connections fail between them.
+
+```bash
+# WRONG - leaves dependent services attached to old gluetun
+docker compose -f docker-compose.arr-stack.yml up -d gluetun
+
+# RIGHT - recreate everything to ensure correct network attachment
+docker compose -f docker-compose.arr-stack.yml up -d --force-recreate
+```
+
+If you see "Unable to connect" errors between VPN-routed services (e.g., Sonarr → qBittorrent), check network attachment:
+```bash
+docker inspect gluetun --format '{{.Id}}' | cut -c1-12  # Get current gluetun ID
+docker inspect sonarr --format '{{.HostConfig.NetworkMode}}'  # Should match
+```
 
 ## Traefik Routing
 
