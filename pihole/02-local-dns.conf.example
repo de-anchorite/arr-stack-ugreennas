@@ -29,5 +29,4 @@ address=/wg.lan/TRAEFIK_LAN_IP
 
 # Utilities
 address=/uptime.lan/TRAEFIK_LAN_IP
-address=/frigate.lan/TRAEFIK_LAN_IP
 # duc.lan disabled - duc not on traefik-proxy network, use http://NAS_IP:8838

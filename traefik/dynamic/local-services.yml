@@ -76,11 +76,6 @@ http:
       entryPoints: [web]
       service: uptime-lan
 
-    frigate-lan:
-      rule: "Host(`frigate.lan`)"
-      entryPoints: [web]
-      service: frigate-lan
-
     # duc-lan disabled - duc runs on separate network, use http://NAS_IP:8838 instead
     # To enable: add duc to traefik-proxy network in docker-compose.utilities.yml
     # duc-lan:
@@ -148,11 +143,6 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.100.13:3001"
-
-    frigate-lan:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.100.30:5000"
 
     # duc-lan:
     #   loadBalancer:

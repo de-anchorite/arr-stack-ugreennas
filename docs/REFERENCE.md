@@ -18,7 +18,6 @@ Port-free access from any device on your LAN:
 | `http://pihole.lan/admin` | Pi-hole |
 | `http://wg.lan` | WireGuard |
 | `http://uptime.lan` | Uptime Kuma |
-| `http://frigate.lan` | Frigate NVR |
 
 > **Setup required:** See [Setup guide section 5.11](SETUP.md#511-local-dns-lan-domains--optional) for router DHCP + Pi-hole DNS configuration.
 
