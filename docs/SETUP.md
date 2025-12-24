@@ -234,6 +234,8 @@ Update `.env` with your provider's required variables.
 
 </details>
 
+> **Simpler VPN setup (no Pi-hole dependency):** By default, Gluetun uses Pi-hole for DNS, which means it waits for Pi-hole to start. If you want simpler startup, edit `docker-compose.arr-stack.yml` and change `DNS_ADDRESS=192.168.100.5` to `DNS_ADDRESS=1.1.1.1`. Trade-off: VPN traffic won't get Pi-hole ad-blocking.
+
 ### 2.4 Service Passwords
 
 **Pi-hole Password:**
@@ -400,6 +402,15 @@ wg:
 ## Step 4: Deploy Services
 
 ### 4.1 Create Docker Network
+
+> **Retrying after a failed deployment?** Clean up orphaned networks first:
+> ```bash
+> # Check for orphaned networks
+> ./scripts/check-network.sh
+>
+> # Or clean all unused networks
+> docker network prune
+> ```
 
 ```bash
 docker network create \

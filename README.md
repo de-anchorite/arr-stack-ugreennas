@@ -1,4 +1,4 @@
-# Media Automation Stack
+# Media Automation Arr Stack
 
 [![GitHub release](https://img.shields.io/github/v/release/Pharkie/arr-stack-ugreennas)](https://github.com/Pharkie/arr-stack-ugreennas/releases)
 
@@ -26,6 +26,7 @@ This project provides configuration files for **legal, open-source software** de
 |-----|---------|
 | **[Setup Guide](docs/SETUP.md)** | Step-by-step deployment |
 | [Quick Reference](docs/REFERENCE.md) | URLs, commands, IPs |
+| [Troubleshooting](docs/TROUBLESHOOTING.md) | Common issues, fixes |
 | [Updating](docs/UPDATING.md) | Pull updates, redeploy |
 | [Backup & Restore](docs/BACKUP.md) | Backup configs, restore |
 | [Home Assistant](docs/HOME-ASSISTANT.md) | Notifications integration |
