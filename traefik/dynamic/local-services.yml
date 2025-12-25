@@ -76,12 +76,10 @@ http:
       entryPoints: [web]
       service: uptime-lan
 
-    # duc-lan disabled - duc runs on separate network, use http://NAS_IP:8838 instead
-    # To enable: add duc to traefik-proxy network in docker-compose.utilities.yml
-    # duc-lan:
-    #   rule: "Host(`duc.lan`)"
-    #   entryPoints: [web]
-    #   service: duc-lan
+    duc-lan:
+      rule: "Host(`duc.lan`)"
+      entryPoints: [web]
+      service: duc-lan
 
   services:
     # === Media Services ===
@@ -144,7 +142,7 @@ http:
         servers:
           - url: "http://172.20.0.13:3001"
 
-    # duc-lan:
-    #   loadBalancer:
-    #     servers:
-    #       - url: "http://duc:80"
+    duc-lan:
+      loadBalancer:
+        servers:
+          - url: "http://172.20.0.14:80"

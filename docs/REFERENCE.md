@@ -18,6 +18,7 @@ Port-free access from any device on your LAN:
 | `http://pihole.lan/admin` | Pi-hole |
 | `http://wg.lan` | WireGuard |
 | `http://uptime.lan` | Uptime Kuma |
+| `http://duc.lan` | duc (disk usage) |
 
 > **Setup required:** See [Setup guide section 5.11](SETUP.md#511-local-dns-lan-domains--optional) for router DHCP + Pi-hole DNS configuration.
 
@@ -55,7 +56,7 @@ All other services are **LAN-only** (not exposed to internet).
 |---------|-----|------|-------|
 | Cloudflared | 172.20.0.12 | — | Tunnel (no ports exposed) |
 | Uptime Kuma | 172.20.0.13 | 3001 | Monitoring |
-| duc | — | 8838 | Disk usage (no static IP) |
+| duc | 172.20.0.14 | 8838 | Disk usage |
 
 ### Service Connection Guide
 
