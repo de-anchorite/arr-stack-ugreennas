@@ -333,3 +333,11 @@ When creating release notes:
 - Link to `docs/UPGRADING.md` for upgrade instructions instead of inline steps
 - Keep notes concise - bullet points, not paragraphs
 - Don't mention Reddit/community feedback as motivation for changes
+
+When updating a release tag to a new commit:
+1. Delete the GitHub release first: `gh release delete v1.x`
+2. Delete and recreate the tag: `git tag -d v1.x && git tag v1.x`
+3. Push tag: `git push origin :refs/tags/v1.x && git push origin v1.x`
+4. Create new release: `gh release create v1.x --title "..." --notes "..."`
+
+**Never** just move the tag - this orphans the release and breaks the GitHub UI.
