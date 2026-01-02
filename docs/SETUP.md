@@ -11,7 +11,7 @@ Complete setup guide for the media automation stack. Works on any Docker host wi
 - [Step 2: Configure Settings](#step-2-configure-settings)
 - [Step 3: Start the Stack](#step-3-start-the-stack)
 - [Step 4: Configure Each App](#step-4-configure-each-app)
-- [Step 5: Test](#step-5-test)
+- [Step 5: Check It Works](#step-5-check-it-works)
 - [Local DNS (.lan domains)](#local-dns-lan-domains---optional) ← + local DNS
 - [External Access](#external-access--optional) ← + remote access
 - [Backup](#backup)
@@ -636,7 +636,7 @@ This gives Usenet a 30-minute head start before considering torrents.
 
 ---
 
-## Step 5: Test
+## Step 5: Check It Works
 
 ### VPN Test
 
