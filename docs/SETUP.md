@@ -136,8 +136,6 @@ See [Quick Reference](REFERENCE.md) for .lan URLs and network details.
 
 > **Don't need all these?** Remove any service from the compose file. Core dependency: Gluetun.
 
-> **Why `restart: always`?** All services use `restart: always` instead of `unless-stopped`. This ensures Docker restarts containers with their correct static IPs after a reboot or OS upgrade. Some NAS platforms (UGOS, Synology DSM) may otherwise start containers via their GUI, which ignores compose network settings and can cause IP conflicts.
-
 ### `docker-compose.utilities.yml`
 
 | Service | Description |
