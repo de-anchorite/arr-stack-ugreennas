@@ -356,7 +356,7 @@ Invent a password for the WireGuard admin UI and note it down, then generate its
 ```bash
 docker run --rm ghcr.io/wg-easy/wg-easy wgpw 'your_chosen_password'
 ```
-Copy the `$2a$12$...` hash output and add to `.env`:
+Copy the `$2a$12$...` hash output to `.env`:
 ```bash
 WG_PASSWORD_HASH=$2a$12$your_generated_hash
 ```
@@ -367,9 +367,7 @@ Invent a password for the Traefik dashboard and note it down, then generate the 
 ```bash
 docker run --rm httpd:alpine htpasswd -nb admin 'your_chosen_password' | sed -e s/\\$/\\$\\$/g
 ```
-Add the output to `.env`: `TRAEFIK_DASHBOARD_AUTH=admin:$$apr1$$...`
-
-**Important:** The `.env` file contains secrets - never commit it to git.
+Copy the output to `.env`: `TRAEFIK_DASHBOARD_AUTH=admin:$$apr1$$...`
 
 ---
 
