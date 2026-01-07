@@ -64,7 +64,7 @@ rm -f traefik/acme.json
 
 ---
 
-### v1.4.4 → v1.4.5
+### v1.4 → v1.5
 
 **Breaking change:** Removed all env var fallbacks from compose files.
 
