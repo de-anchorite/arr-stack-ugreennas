@@ -13,7 +13,7 @@ Works on Ugreen, Synology, QNAP, or any Docker host.
 ## Why "Ultimate"?
 
 - **Production-ready** — Real healthchecks, auto-recovery when VPN reconnects, backup script. Not just "it runs."
-- **Everything you need** — Jellyfin, Sonarr, Radarr, Prowlarr, Bazarr, Jellyseerr, qBittorrent, SABnzbd, Pi-hole, WireGuard, Cloudflare Tunnel. Modular — skip what you don't need, add Lidarr if you do.
+- **Everything you need** — Jellyfin, Sonarr, Radarr, Prowlarr, Bazarr, Jellyseerr, qBittorrent, SABnzbd, Pi-hole, WireGuard, Cloudflare Tunnel. Modular — skip what you don't need, add what you do (e.g. Lidarr).
 - **Step-by-step guide** — Not just a docker-compose file in a repo.
 - **Flexible** — Plex variant included. Supports 30+ VPN providers.
 - **Privacy by default** — All downloads route through your VPN.
