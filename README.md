@@ -12,10 +12,11 @@ Works on Ugreen, Synology, QNAP, or any Docker host.
 
 ## Why "Ultimate"?
 
-- **Everything you need** — Jellyfin (media server), Sonarr (TV), Radarr (movies), Prowlarr (indexers), Bazarr (subtitles), Jellyseerr (requests), qBittorrent (torrents), SABnzbd (Usenet), Pi-hole (ad-blocking DNS for your network), WireGuard (remote access), Cloudflare Tunnel (external access). Easy to add or remove.
-- **Flexible** — Plex variant included. Supports 30+ VPN providers (Surfshark, NordVPN, PIA, Mullvad, ProtonVPN, etc.).
-- **Step-by-step setup guide** — Not just a docker-compose file in a repo.
-- **Privacy by default** — All downloads route through your VPN. No IP leaks.
+- **Production-ready** — Real healthchecks, auto-recovery when VPN reconnects, backup script. Not just "it runs."
+- **Everything you need** — Jellyfin, Sonarr, Radarr, Prowlarr, Bazarr, Jellyseerr, qBittorrent, SABnzbd, Pi-hole, WireGuard, Cloudflare Tunnel. Easy to add or remove.
+- **Step-by-step guide** — Not just a docker-compose file in a repo.
+- **Flexible** — Plex variant included. Supports 30+ VPN providers.
+- **Privacy by default** — All downloads route through your VPN.
 
 <details>
 <summary>Technical features</summary>
