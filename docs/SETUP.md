@@ -116,7 +116,7 @@ If you use Tailscale: skip the WireGuard *service* (the `WG_PASSWORD_HASH` stuff
 | `docker-compose.arr-stack.yml` | Core media stack (Jellyfin, *arr apps, downloads, VPN) | Core |
 | `docker-compose.traefik.yml` | Reverse proxy for .lan domains and external access | + local DNS |
 | `docker-compose.cloudflared.yml` | Secure tunnel to Cloudflare (no port forwarding) | + remote access |
-| `docker-compose.utilities.yml` | Monitoring, auto-recovery, disk usage | Optional extras |
+| `docker-compose.utilities.yml` | Monitoring, auto-recovery, disk usage | Utilities (optional) |
 
 See [Quick Reference](REFERENCE.md) for full service lists, .lan URLs, and network details.
 
