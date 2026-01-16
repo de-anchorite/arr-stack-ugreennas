@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - **Beszel system monitoring**: Lightweight metrics for CPU, RAM, disk, network, and Docker containers (hub + agent with healthchecks)
 - **DNS duplicate detection**: Pre-commit hook (check 9) and standalone script (`./scripts/check-dns-duplicates.sh`) to warn if same `.lan` domain defined in both dnsmasq and pihole.toml
+- **Domain accessibility check**: Pre-commit hook (check 10) verifies all `.lan` and external domains are reachable
 
 ### Changed
 - **Renamed "Optional extras"**: Now "Utilities (optional)" for consistency with `docker-compose.utilities.yml`
@@ -19,6 +20,7 @@ All notable changes to this project will be documented in this file.
 ### Documentation
 - Beszel setup instructions in SETUP.md
 - Clarified `.lan` DNS guidance: don't define same domain in both dnsmasq config and Pi-hole web UI
+- Clarified Docker requirements: NAS users often have Docker preinstalled (UGOS) or one-click install (Synology/QNAP)
 
 ---
 
