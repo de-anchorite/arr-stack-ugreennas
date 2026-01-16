@@ -49,7 +49,9 @@ Here's what you'll need to get started.
 - SSH access to your host
 - **VPN Subscription** - Any provider supported by [Gluetun](https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers) (Surfshark, NordVPN, PIA, Mullvad, ProtonVPN, etc.)
 
-> **NAS users (Ugreen, Synology, QNAP):** Install "Docker" from your NAS app store - it includes both Engine and Compose. Git needs to be installed via SSH (shown in Step 1). That's it!
+> **Ugreen NAS:** Docker comes preinstalled - you don't need to install anything! Just install Git via SSH (shown in Step 1).
+>
+> **Synology / QNAP:** Install "Docker" or "Container Manager" from your NAS app store - it includes both Engine and Compose.
 
 <details>
 <summary><strong>Already using Tailscale?</strong></summary>
@@ -138,14 +140,13 @@ To fork: Click "Fork" on GitHub, then clone your fork instead of this repo.
 <details>
 <summary><strong>Ugreen NAS (UGOS)</strong></summary>
 
-Folders created via SSH don't appear in UGOS Files app. Create top-level folders via GUI for visibility.
+Docker comes preinstalled on UGOS - no installation needed! Folders created via SSH don't appear in UGOS Files app, so create top-level folders via GUI.
 
-1. **Install Docker:** Open **App Centre** → search "Docker" → Install
-2. Open UGOS web interface → **Files** app
-3. Create shared folders: **Media**, **docker**
-4. Inside **Media**, create subfolders: **downloads**, **tv**, **movies**
-5. Enable SSH: **Control Panel** → **Terminal** → toggle SSH on
-6. SSH into your NAS and install git:
+1. Open UGOS web interface → **Files** app
+2. Create shared folders: **Media**, **docker**
+3. Inside **Media**, create subfolders: **downloads**, **tv**, **movies**
+4. Enable SSH: **Control Panel** → **Terminal** → toggle SSH on
+5. SSH into your NAS and install git:
 
 ```bash
 ssh your-username@nas-ip
