@@ -267,6 +267,11 @@ services:
       - "1900:1900/udp" # DLNA
     environment:
       - TZ=${TZ}
+    # Hardware transcoding (Intel Quick Sync) - optional, see SETUP.md
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - "${RENDER_GROUP_ID:-0}"  # Run: getent group render | cut -d: -f3
     volumes:
       - jellyfin-config:/config
       - jellyfin-cache:/cache
