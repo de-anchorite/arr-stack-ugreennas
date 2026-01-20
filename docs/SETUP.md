@@ -136,11 +136,9 @@ See [Quick Reference](REFERENCE.md) for full service lists, .lan URLs, and netwo
 
 First, set up the folder structure for your media and get the files from this GitHub repo onto your NAS.
 
-**Clone or Fork?**
-- **Clone** (simpler): Just want to use the stack, pull updates occasionally
-- **Fork** (recommended): Plan to add your own services (e.g., Audiobookshelf, Nextcloud), want to contribute improvements back, or keep your own version
+**Fork first (recommended):** Click "Fork" on GitHub, then clone your fork. This lets you add your own services, customise configs, and pull upstream updates when you want them.
 
-To fork: Click "Fork" on GitHub, then clone your fork instead of this repo.
+> **Just want to try it?** You can clone this repo directly instead of forking. You'll still get updates via `git pull`, but can't push your own changes.
 
 <details>
 <summary><strong>Ugreen NAS (UGOS)</strong></summary>
