@@ -975,8 +975,10 @@ Settings: External port `51820`, Internal port `51820`, Protocol `UDP`, Internal
 
 1. Open `http://wg.lan` (or `https://wg.yourdomain.com` if Cloudflare Tunnel is set up)
 2. Login with password from Step 2.5
-3. Click **"+ New"** to create a client (e.g., "iPhone")
+3. Click **"+ New Client"** to create a client (e.g., "iPhone")
 4. Click the QR code icon
+
+![WireGuard UI - New Client](images/wireguard/Wireguard_newclient.png)
 
 **3. Install WireGuard on your phone:**
 
@@ -984,6 +986,8 @@ Settings: External port `51820`, Internal port `51820`, Protocol `UDP`, Internal
 2. Tap **+** → **Create from QR code**
 3. Scan the QR code from step 2
 4. Name it (e.g., "Home NAS")
+
+![WireGuard iOS - Add Tunnel](images/wireguard/Wireguard_ios1.png)
 
 **4. Test the connection:**
 
