@@ -44,20 +44,18 @@ Here's what you'll need to get started.
 
 ### Software & Services
 - **Docker** - Preinstalled on UGOS; one-click install from app store on Synology/QNAP
+  <details>
+  <summary><strong>New to Docker?</strong></summary>
+
+  **Docker** runs applications in isolated "containers" - like lightweight virtual machines. Each service (Jellyfin, Sonarr, etc.) runs in its own container.
+
+  **Docker Compose** lets you define multiple containers in a single file (`docker-compose.yml`) and start them all with one command. Instead of typing out dozens of options for each container, you just run `docker compose up -d`.
+
+  This stack uses Docker Compose because it has 10+ services that need to work together. The compose file defines how they're connected, what ports they use, and where they store data.
+
+  </details>
 - **SSH access** to your NAS (enable in NAS settings)
 - **VPN Subscription** - Any provider supported by [Gluetun](https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers) (Surfshark, NordVPN, PIA, Mullvad, ProtonVPN, etc.)
-
-<details>
-<summary><strong>New to Docker?</strong></summary>
-
-**Docker** runs applications in isolated "containers" - like lightweight virtual machines. Each service (Jellyfin, Sonarr, etc.) runs in its own container.
-
-**Docker Compose** lets you define multiple containers in a single file (`docker-compose.yml`) and start them all with one command. Instead of typing out dozens of options for each container, you just run `docker compose up -d`.
-
-This stack uses Docker Compose because it has 10+ services that need to work together. The compose file defines how they're connected, what ports they use, and where they store data.
-
-</details>
-
 - **Usenet Provider** (optional, ~$4-6/month) - Frugal Usenet, Newshosting, Eweka, etc.
 - **Usenet Indexer** (optional) - NZBGeek (~$12/year) or DrunkenSlug (free tier)
 
