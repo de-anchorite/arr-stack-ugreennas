@@ -31,6 +31,7 @@ The container uses a static IP with a fake MAC address (`TRAEFIK_LAN_MAC` in `.e
 - **Netgear:** Advanced → Setup → LAN Setup → Address Reservation → Add
 - **ASUS:** LAN → DHCP Server → Manual Assignment → Add
 - **Linksys:** Connectivity → Local Network → DHCP Reservations
+- **Other routers:** Look for "DHCP Reservation" or "Address Reservation"
 
 </details>
 
