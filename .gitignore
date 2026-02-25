@@ -63,6 +63,7 @@ desktop.ini
 .settings/
 *.sublime-project
 *.sublime-workspace
+*.code-workspace
 
 # Docker
 docker-compose.override.yml

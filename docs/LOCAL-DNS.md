@@ -53,6 +53,7 @@ docker compose -f docker-compose.traefik.yml up -d
 ```bash
 # Copy example and replace placeholder with your Traefik IP
 sed "s/TRAEFIK_LAN_IP/10.10.0.11/g" pihole/02-local-dns.conf.example > pihole/02-local-dns.conf
+chmod 644 pihole/02-local-dns.conf
 
 # Tell Pi-hole to load custom DNS configs from dnsmasq.d folder (one-time)
 docker exec pihole sed -i 's/etc_dnsmasq_d = false/etc_dnsmasq_d = true/' /etc/pihole/pihole.toml

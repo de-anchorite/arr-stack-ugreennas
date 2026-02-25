@@ -292,7 +292,7 @@ services:
   # For: Home Pro + Anywhere setups
   # ═══════════════════════════════════════════════════════════════════════════
   pihole:
-    image: pihole/pihole:2025.11.1
+    image: pihole/pihole:2026.02.0
     container_name: pihole
     ports:
       - "${NAS_IP}:53:53/tcp"  # Bind to NAS IP (not 0.0.0.0) to avoid conflict with host dnsmasq on 127.0.0.1:53
