@@ -23,16 +23,16 @@ http:
       service: seerr-lan
 
     # Legacy redirects (jellyseerr/jellyseer → seerr)
-    seerr-lan:
-      rule: "Host(`seerr.mediastack.lab`)"
+    jellyseerr-lan:
+      rule: "Host(`jellyseerr.mediastack.lab`)"
       entryPoints: [web]
-      middlewares: [seerr-redirect]
+      middlewares: [jellyseerr-redirect]
       service: seerr-lan
 
-    seerr-lan:
-      rule: "Host(`seerr.mediastack.lab`)"
+    jellyseer-lan:
+      rule: "Host(`jellyseer.mediastack.lab`)"
       entryPoints: [web]
-      middlewares: [seerr-redirect]
+      middlewares: [jellyseerr-redirect]
       service: seerr-lan
 
     # === *arr Stack (VPN-protected via Gluetun) ===
@@ -95,9 +95,9 @@ http:
       service: beszel-lan
 
   middlewares:
-    seerr-redirect:
+    jellyseerr-redirect:
       redirectRegex:
-        regex: "^http://seerr{1,2}[.]mediastack[.]lab(.*)"
+        regex: "^http://jellyseer{1,2}[.]mediastack[.]lab(.*)"
         replacement: "http://seerr.mediastack.lab${1}"
         permanent: true
 
