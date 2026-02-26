@@ -139,6 +139,11 @@ http:
         servers:
           - url: "http://172.20.0.3:8686"
 
+    lazylibrarian-lan:
+      loadBalancer:
+        servers:
+          - url: "http://172.20.0.3:5299"
+
     bazarr-lan:
       loadBalancer:
         servers:

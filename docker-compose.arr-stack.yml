@@ -346,8 +346,6 @@ services:
       gluetun:
         condition: service_healthy
         restart: true
-    ports:
-      - "8686:8686"  # Local network access
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -368,7 +366,7 @@ services:
 
   # ═══════════════════════════════════════════════════════════════════════════
   # LazyLibrarian - Ebook & Audiobook manager. Automatically downloads books.
-  # Access: lazylibrarian.mediastack.lab | lazylibrarian.yourdomain.com | NAS_IP:8686
+  # Access: lazylibrarian.mediastack.lab | lazylibrarian.yourdomain.com | NAS_IP:5299
   # ═══════════════════════════════════════════════════════════════════════════
   lazylibrarian:
     image: lscr.io/linuxserver/lazylibrarian:latest
@@ -378,8 +376,6 @@ services:
       gluetun:
         condition: service_healthy
         restart: true
-    ports:
-      - "5299:5299"  # Local network access
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
