@@ -221,7 +221,6 @@ services:
       - ${MEDIA_ROOT}/music:/music
     ports:
       - "32400:32400"   # Web UI
-      - "5353:5353/udp" # Client discovery (auto-detect on LAN)
       - "1900:1900/udp" # DLNA
       - "8324:8324"     # Plex Companion (remote control)
       - "32410:32410/udp" # GDM network discovery
