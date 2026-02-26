@@ -39,9 +39,6 @@ services:
   gluetun:
     image: qmcgaw/gluetun:v3.41
     container_name: gluetun
-    depends_on:
-      pihole:
-        condition: service_healthy  # Wait for Pi-hole DNS before VPN connects
     cap_add:
       - NET_ADMIN
     devices:
