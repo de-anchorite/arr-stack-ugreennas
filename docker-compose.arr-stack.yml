@@ -8,23 +8,6 @@
 #####################################################################
 
 #########################
-# Centralized Volumes   #
-#########################
-volumes:
-  gluetun-config:
-  qbittorrent-config:
-  sabnzbd-config:
-  sonarr-config:
-  prowlarr-config:
-  radarr-config:
-  jellyfin-config:
-  jellyfin-cache:
-  jellyseerr-config:
-  bazarr-config:
-  pihole-etc-pihole:
-  pihole-etc-dnsmasq:
-
-#########################
 # Networks              #
 #########################
 networks:
@@ -64,7 +47,7 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     volumes:
-      - gluetun-config:/gluetun
+      - ${CONFIG_ROOT}/gluetun:/gluetun
     environment:
       # VPN Configuration - see .env.example for provider-specific setup
       - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER}
@@ -73,16 +56,17 @@ services:
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - SERVER_COUNTRIES=${VPN_COUNTRIES}
       - TZ=${TZ}
-      - DNS_ADDRESS=172.20.0.5
+      - DNS_ADDRESS=1.1.1.1
       - FIREWALL_OUTBOUND_SUBNETS=${LAN_SUBNET},172.20.0.0/24,10.8.1.0/24
     ports:
       # Ports for services using network_mode: "service:gluetun"
       # Enables direct local access without Traefik (http://NAS_IP:PORT)
       - "8989:8989"   # Sonarr
       - "7878:7878"   # Radarr
+      - "8686:8686"   # Lidarr
+      - "5299:5299"   # Lazylibrarian
       - "9696:9696"   # Prowlarr
       - "8085:8085"   # qBittorrent
-      - "8082:8080"   # SABnzbd
       - "8191:8191"   # FlareSolverr
     networks:
       arr-stack:
@@ -116,7 +100,7 @@ services:
       - WEBUI_PORT=8085
       - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
     volumes:
-      - qbittorrent-config:/config
+      - ${CONFIG_ROOT}/qbittorrent:/config
       - ${MEDIA_ROOT}/downloads:/downloads
     labels:
       - deunhealth.restart.on.unhealthy=true
@@ -125,37 +109,6 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "curl -sf http://localhost:8085/ && wget -q --spider --timeout=5 http://www.google.com"]
       interval: 2m
-      timeout: 15s
-      retries: 2
-      start_period: 60s
-
-  # ═══════════════════════════════════════════════════════════════════════════
-  # SABNZBD - Usenet download client. Downloads via VPN for extra security.
-  # Access: sabnzbd.lan | sabnzbd.yourdomain.com | NAS_IP:8082
-  # ═══════════════════════════════════════════════════════════════════════════
-  sabnzbd:
-    image: lscr.io/linuxserver/sabnzbd:4.5.5
-    container_name: sabnzbd
-    network_mode: "service:gluetun"
-    depends_on:
-      gluetun:
-        condition: service_healthy
-        restart: true
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - sabnzbd-config:/config
-      - ${MEDIA_ROOT}/downloads:/downloads
-      - ${MEDIA_ROOT}/downloads/incomplete:/incomplete-downloads
-    labels:
-      - deunhealth.restart.on.unhealthy=true
-    restart: always
-    logging: *default-logging
-    healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:8080/ && wget -q --spider --timeout=5 http://www.google.com"]
-      interval: 3m
       timeout: 15s
       retries: 2
       start_period: 60s
@@ -177,7 +130,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - sonarr-config:/config
+      - ${CONFIG_ROOT}/sonarr:/config
       - ${MEDIA_ROOT}/tv:/tv
       - ${MEDIA_ROOT}/downloads:/downloads
     labels:
@@ -208,7 +161,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - prowlarr-config:/config
+      - ${CONFIG_ROOT}/prowlarr:/config
     labels:
       - deunhealth.restart.on.unhealthy=true
     restart: always
@@ -237,7 +190,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - radarr-config:/config
+      - ${CONFIG_ROOT}/radarr:/config
       - ${MEDIA_ROOT}/movies:/movies
       - ${MEDIA_ROOT}/downloads:/downloads
     labels:
@@ -252,71 +205,42 @@ services:
       start_period: 60s
 
   # ═══════════════════════════════════════════════════════════════════════════
-  # JELLYFIN - Media server. Stream your movies and TV shows like Netflix.
-  # Access: jellyfin.lan | jellyfin.yourdomain.com | NAS_IP:8096
+  # PLEX - Media server. Stream your movies and TV shows like Netflix.
+  # Access: plex.lan | plex.yourdomain.com | NAS_IP:32400
   # ═══════════════════════════════════════════════════════════════════════════
-  jellyfin:
-    image: jellyfin/jellyfin:10.11
-    container_name: jellyfin
-    ports:
-      - "8096:8096"     # Web UI
-      - "7359:7359/udp" # Client discovery (auto-detect on LAN)
-      - "1900:1900/udp" # DLNA
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
     environment:
-      - TZ=${TZ}
-    # Hardware transcoding (Intel Quick Sync) - remove these 4 lines if no Intel GPU
-    devices:
-      - /dev/dri:/dev/dri
-    group_add:
-      - "${RENDER_GROUP_ID:-0}"  # Find ID: getent group render | cut -d: -f3
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM}
+      - ADVERTISE_IP=https://plex.${DOMAIN}/
     volumes:
-      - jellyfin-config:/config
-      - jellyfin-cache:/cache
-      - ${MEDIA_ROOT}/movies:/media/movies:ro
-      - ${MEDIA_ROOT}/tv:/media/tv:ro
+      - ${CONFIG_ROOT}/plex:/config
+      - ${MEDIA_ROOT}/tv:/tv
+      - ${MEDIA_ROOT}/movies:/movies
+      - ${MEDIA_ROOT}/music:/music
+    ports:
+      - "32400:32400"   # Web UI
+      - "5353:5353/udp" # Client discovery (auto-detect on LAN)
+      - "1900:1900/udp" # DLNA
+      - "8324:8324"     # Plex Companion (remote control)
+      - "32410:32410/udp" # GDM network discovery
+      - "32412:32412/udp" # GDM network discovery
+      - "32413:32413/udp" # GDM network discovery
+      - "32414:32414/udp" # GDM network discovery
+      - "32469:32469"   # Plex DLNA
     networks:
       arr-stack:
         ipv4_address: 172.20.0.4
     restart: always
     logging: *default-logging
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:32400/status/sessions"]
       interval: 1m
       timeout: 30s
-      retries: 2
-      start_period: 30s
-
-  # ═══════════════════════════════════════════════════════════════════════════
-  # PI-HOLE - DNS server. Enables .lan domains and blocks ads network-wide.
-  # Access: pihole.lan/admin | NAS_IP:8081/admin
-  # For: Home Pro + Anywhere setups
-  # ═══════════════════════════════════════════════════════════════════════════
-  pihole:
-    image: pihole/pihole:2026.02.0
-    container_name: pihole
-    ports:
-      - "${NAS_IP}:53:53/tcp"  # Bind to NAS IP (not 0.0.0.0) to avoid conflict with host dnsmasq on 127.0.0.1:53
-      - "${NAS_IP}:53:53/udp"  # NAS_IP MUST be a static IP — DHCP IPs aren't ready at boot, causing exit 128
-      - "8081:80"  # Web UI (local network access)
-    networks:
-      arr-stack:
-        ipv4_address: 172.20.0.5
-    environment:
-      - TZ=${TZ}
-      - FTLCONF_webserver_api_password=${PIHOLE_UI_PASS}
-      - FTLCONF_dns_listeningMode=all
-    volumes:
-      - pihole-etc-pihole:/etc/pihole
-      - pihole-etc-dnsmasq:/etc/dnsmasq.d
-      - ./pihole/02-local-dns.conf:/etc/dnsmasq.d/02-local-dns.conf:ro
-    cap_add:
-      - NET_ADMIN
-    restart: always
-    logging: *default-logging
-    healthcheck:
-      test: ["CMD", "dig", "@127.0.0.1", "-p", "53", "google.com", "+short"]
-      interval: 30s
-      timeout: 10s
       retries: 2
       start_period: 30s
 
@@ -324,10 +248,10 @@ services:
   # SEERR (formerly Jellyseerr) - Request portal. Users request movies/shows here.
   # Access: seerr.lan | seerr.yourdomain.com | NAS_IP:5055
   # ═══════════════════════════════════════════════════════════════════════════
-  jellyseerr:
+  seerr:
     image: ghcr.io/seerr-team/seerr:v3.0.1
     init: true
-    container_name: jellyseerr
+    container_name: seerr
     depends_on:
       gluetun:
         condition: service_healthy  # Needs gluetun to reach Sonarr/Radarr
@@ -342,7 +266,7 @@ services:
       arr-stack:
         ipv4_address: 172.20.0.8
     volumes:
-      - jellyseerr-config:/app/config
+      - ${CONFIG_ROOT}/seerr:/app/config
     restart: always
     logging: *default-logging
     healthcheck:
@@ -373,7 +297,7 @@ services:
       arr-stack:
         ipv4_address: 172.20.0.9
     volumes:
-      - bazarr-config:/config
+      - ${CONFIG_ROOT}/bazarr:/config
       - ${MEDIA_ROOT}/movies:/movies
       - ${MEDIA_ROOT}/tv:/tv
     restart: always
@@ -412,4 +336,101 @@ services:
       timeout: 60s
       retries: 2
       start_period: 60s
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # LIDARR - Music manager. Automatically downloads music.
+  # Access: lidarr.lan | lidarr.yourdomain.com | NAS_IP:8686
+  # ═══════════════════════════════════════════════════════════════════════════
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+    ports:
+      - "8686:8686"  # Local network access
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/lidarr:/config
+      - ${MEDIA_ROOT}:/data  # Same mount as qBittorrent for hardlinks
+    labels:
+      - deunhealth.restart.on.unhealthy=true
+    restart: always
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8686/ && wget -q --spider --timeout=5 http://www.google.com"]
+      interval: 2m
+      timeout: 15s
+      retries: 2
+      start_period: 60s
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # LazyLibrarian - Ebook & Audiobook manager. Automatically downloads books.
+  # Access: lazylibrarian.lan | lazylibrarian.yourdomain.com | NAS_IP:8686
+  # ═══════════════════════════════════════════════════════════════════════════
+  lazylibrarian:
+    image: lscr.io/linuxserver/lazylibrarian:latest
+    container_name: lazylibrarian
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+    ports:
+      - "5299:5299"  # Local network access
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg
+    volumes:
+      - ${CONFIG_ROOT}/lazylibrarian:/config
+      - ${MEDIA_ROOT}:/data
+      - ${MEDIA_ROOT}/scripts/lazylibrarian:/home/scripts:rw
+    labels:
+      - deunhealth.restart.on.unhealthy=true
+    restart: always
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:5299/ && wget -q --spider --timeout=5 http://www.google.com"]
+      interval: 2m
+      timeout: 15s
+      retries: 2
+      start_period: 60s
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Calibre Web - Ebook Library Web UI
+  # Access: calibre-web.lan | calibre-web.yourdomain.com | NAS_IP:8083
+  # ═══════════════════════════════════════════════════════════════════════════
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web
+    depends_on:
+      gluetun:
+        condition: service_healthy  # Needs gluetun to reach LazyLibrarian
+        restart: true
+    networks:
+      arr-stack:
+        ipv4_address: 172.20.0.10
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/calibre-web:/config
+      - ${MEDIA_ROOT}/books:/books
+    labels:
+      - deunhealth.restart.on.unhealthy=true
+    restart: always
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/"]
+      interval: 3m
+      timeout: 10s
+      retries: 2
 
