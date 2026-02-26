@@ -255,6 +255,8 @@ services:
     ports:
       - "5055:5055"  # Local network access (all interfaces)
     environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
       - LOG_LEVEL=info
       - TZ=${TZ}
       - PORT=5055
