@@ -1,112 +1,117 @@
-# Local .lan domain routing (port-free access)
+# Local .mediastack.lab domain routing (port-free access)
 #
 # How it works:
-# 1. Pi-hole DNS resolves *.lan → TRAEFIK_LAN_IP (macvlan, e.g. 10.10.0.11)
-# 2. Browser requests http://sonarr.lan → Traefik on port 80 (macvlan IP)
+# 1. Pi-hole DNS resolves *.mediastack.lab → TRAEFIK_LAN_IP (macvlan, e.g. 10.10.0.11)
+# 2. Browser requests http://sonarr.mediastack.lab → Traefik on port 80 (macvlan IP)
 # 3. Traefik matches Host header → routes to correct service:port
 #
-# Result: http://sonarr.lan instead of http://10.10.0.10:8989
+# Result: http://sonarr.mediastack.lab instead of http://10.10.0.10:8989
 #
 # Note: Requires Traefik macvlan setup (see docs/LOCAL-DNS.md)
 
 http:
   routers:
     # === Media Services ===
-    jellyfin-lan:
-      rule: "Host(`jellyfin.lan`)"
+    plex-lan:
+      rule: "Host(`plex.mediastack.lab`)"
       entryPoints: [web]
-      service: jellyfin-lan
+      service: plex-lan
 
     seerr-lan:
-      rule: "Host(`seerr.lan`)"
+      rule: "Host(`seerr.mediastack.lab`)"
       entryPoints: [web]
       service: seerr-lan
 
     # Legacy redirects (jellyseerr/jellyseer → seerr)
-    jellyseerr-lan:
-      rule: "Host(`jellyseerr.lan`)"
+    seerr-lan:
+      rule: "Host(`seerr.mediastack.lab`)"
       entryPoints: [web]
-      middlewares: [jellyseerr-redirect]
+      middlewares: [seerr-redirect]
       service: seerr-lan
 
-    jellyseer-lan:
-      rule: "Host(`jellyseer.lan`)"
+    seerr-lan:
+      rule: "Host(`seerr.mediastack.lab`)"
       entryPoints: [web]
-      middlewares: [jellyseerr-redirect]
+      middlewares: [seerr-redirect]
       service: seerr-lan
 
     # === *arr Stack (VPN-protected via Gluetun) ===
     sonarr-lan:
-      rule: "Host(`sonarr.lan`)"
+      rule: "Host(`sonarr.mediastack.lab`)"
       entryPoints: [web]
       service: sonarr-lan
 
     radarr-lan:
-      rule: "Host(`radarr.lan`)"
+      rule: "Host(`radarr.mediastack.lab`)"
       entryPoints: [web]
       service: radarr-lan
 
     prowlarr-lan:
-      rule: "Host(`prowlarr.lan`)"
+      rule: "Host(`prowlarr.mediastack.lab`)"
       entryPoints: [web]
       service: prowlarr-lan
 
     bazarr-lan:
-      rule: "Host(`bazarr.lan`)"
+      rule: "Host(`bazarr.mediastack.lab`)"
       entryPoints: [web]
       service: bazarr-lan
 
+    lidarr-lan:
+      rule: "Host(`lidarr.mediastack.lab`)"
+      entryPoints: [web]
+      service: lidarr-lan
+
+    lazylibrarian-lan:
+      rule: "Host(`lazylibrarian.mediastack.lab`)"
+      entryPoints: [web]
+      service: lazylibrarian-lan
+
     # === Download Clients ===
     qbit-lan:
-      rule: "Host(`qbit.lan`)"
+      rule: "Host(`qbit.mediastack.lab`)"
       entryPoints: [web]
       service: qbit-lan
 
-    sabnzbd-lan:
-      rule: "Host(`sabnzbd.lan`)"
-      entryPoints: [web]
-      service: sabnzbd-lan
-
     # === Infrastructure ===
     traefik-lan:
-      rule: "Host(`traefik.lan`)"
+      rule: "Host(`traefik.mediastack.lab`)"
       entryPoints: [web]
       service: api@internal
 
-    pihole-lan:
-      rule: "Host(`pihole.lan`)"
-      entryPoints: [web]
-      service: pihole-lan
-
     # === Utilities ===
     uptime-lan:
-      rule: "Host(`uptime.lan`)"
+      rule: "Host(`uptime.mediastack.lab`)"
       entryPoints: [web]
       service: uptime-lan
 
     duc-lan:
-      rule: "Host(`duc.lan`)"
+      rule: "Host(`duc.mediastack.lab`)"
       entryPoints: [web]
       service: duc-lan
 
     beszel-lan:
-      rule: "Host(`beszel.lan`)"
+      rule: "Host(`beszel.mediastack.lab`)"
       entryPoints: [web]
       service: beszel-lan
 
   middlewares:
-    jellyseerr-redirect:
+    seerr-redirect:
       redirectRegex:
-        regex: "^http://jellyseer{1,2}[.]lan(.*)"
-        replacement: "http://seerr.lan${1}"
+        regex: "^http://seerr{1,2}[.]mediastack[.]lab(.*)"
+        replacement: "http://seerr.mediastack.lab${1}"
         permanent: true
 
   services:
     # === Media Services ===
-    jellyfin-lan:
+    plex-lan:
       loadBalancer:
         servers:
-          - url: "http://172.20.0.4:8096"
+          - url: "http://172.20.0.4:32400"
+
+    calibre-lan:
+      loadBalancer:
+        servers:
+          - url: "http://172.20.0.10:8083"
 
     seerr-lan:
       loadBalancer:
@@ -129,6 +134,11 @@ http:
         servers:
           - url: "http://172.20.0.3:9696"
 
+    lidarr-lan:
+      loadBalancer:
+        servers:
+          - url: "http://172.20.0.3:8686"
+
     bazarr-lan:
       loadBalancer:
         servers:
@@ -144,12 +154,6 @@ http:
       loadBalancer:
         servers:
           - url: "http://172.20.0.3:8080"
-
-    # === Infrastructure ===
-    pihole-lan:
-      loadBalancer:
-        servers:
-          - url: "http://172.20.0.5:80"
 
     # === Utilities ===
     uptime-lan:

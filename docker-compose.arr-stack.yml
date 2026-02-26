@@ -83,7 +83,7 @@ services:
 
   # ═══════════════════════════════════════════════════════════════════════════
   # QBITTORRENT - Torrent download client. Downloads files through VPN.
-  # Access: qbit.lan | qbit.yourdomain.com | NAS_IP:8085
+  # Access: qbit.mediastack.lab | qbit.yourdomain.com | NAS_IP:8085
   # ═══════════════════════════════════════════════════════════════════════════
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:5.1.4
@@ -115,7 +115,7 @@ services:
 
   # ═══════════════════════════════════════════════════════════════════════════
   # SONARR - TV show monitor. Watches for new episodes and sends to download.
-  # Access: sonarr.lan | sonarr.yourdomain.com | NAS_IP:8989
+  # Access: sonarr.mediastack.lab | sonarr.yourdomain.com | NAS_IP:8989
   # ═══════════════════════════════════════════════════════════════════════════
   sonarr:
     image: lscr.io/linuxserver/sonarr:4.0.16
@@ -146,7 +146,7 @@ services:
 
   # ═══════════════════════════════════════════════════════════════════════════
   # PROWLARR - Indexer manager. Finds download sources for Sonarr/Radarr.
-  # Access: prowlarr.lan | prowlarr.yourdomain.com | NAS_IP:9696
+  # Access: prowlarr.mediastack.lab | prowlarr.yourdomain.com | NAS_IP:9696
   # ═══════════════════════════════════════════════════════════════════════════
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:2.3.0
@@ -175,7 +175,7 @@ services:
 
   # ═══════════════════════════════════════════════════════════════════════════
   # RADARR - Movie monitor. Watches for new movies and sends to download.
-  # Access: radarr.lan | radarr.yourdomain.com | NAS_IP:7878
+  # Access: radarr.mediastack.lab | radarr.yourdomain.com | NAS_IP:7878
   # ═══════════════════════════════════════════════════════════════════════════
   radarr:
     image: lscr.io/linuxserver/radarr:6.0.4
@@ -206,7 +206,7 @@ services:
 
   # ═══════════════════════════════════════════════════════════════════════════
   # PLEX - Media server. Stream your movies and TV shows like Netflix.
-  # Access: plex.lan | plex.yourdomain.com | NAS_IP:32400
+  # Access: plex.mediastack.lab | plex.yourdomain.com | NAS_IP:32400
   # ═══════════════════════════════════════════════════════════════════════════
   plex:
     image: lscr.io/linuxserver/plex:latest
@@ -246,7 +246,7 @@ services:
 
   # ═══════════════════════════════════════════════════════════════════════════
   # SEERR (formerly Jellyseerr) - Request portal. Users request movies/shows here.
-  # Access: seerr.lan | seerr.yourdomain.com | NAS_IP:5055
+  # Access: seerr.mediastack.lab | seerr.yourdomain.com | NAS_IP:5055
   # ═══════════════════════════════════════════════════════════════════════════
   seerr:
     image: ghcr.io/seerr-team/seerr:v3.0.1
@@ -278,7 +278,7 @@ services:
 
   # ═══════════════════════════════════════════════════════════════════════════
   # BAZARR - Subtitle manager. Automatically downloads subtitles.
-  # Access: bazarr.lan | bazarr.yourdomain.com | NAS_IP:6767
+  # Access: bazarr.mediastack.lab | bazarr.yourdomain.com | NAS_IP:6767
   # ═══════════════════════════════════════════════════════════════════════════
   bazarr:
     image: lscr.io/linuxserver/bazarr:1.5.5
@@ -339,7 +339,7 @@ services:
   
   # ═══════════════════════════════════════════════════════════════════════════
   # LIDARR - Music manager. Automatically downloads music.
-  # Access: lidarr.lan | lidarr.yourdomain.com | NAS_IP:8686
+  # Access: lidarr.mediastack.lab | lidarr.yourdomain.com | NAS_IP:8686
   # ═══════════════════════════════════════════════════════════════════════════
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
@@ -371,7 +371,7 @@ services:
 
   # ═══════════════════════════════════════════════════════════════════════════
   # LazyLibrarian - Ebook & Audiobook manager. Automatically downloads books.
-  # Access: lazylibrarian.lan | lazylibrarian.yourdomain.com | NAS_IP:8686
+  # Access: lazylibrarian.mediastack.lab | lazylibrarian.yourdomain.com | NAS_IP:8686
   # ═══════════════════════════════════════════════════════════════════════════
   lazylibrarian:
     image: lscr.io/linuxserver/lazylibrarian:latest
@@ -405,7 +405,7 @@ services:
 
   # ═══════════════════════════════════════════════════════════════════════════
   # Calibre Web - Ebook Library Web UI
-  # Access: calibre-web.lan | calibre-web.yourdomain.com | NAS_IP:8083
+  # Access: calibre-web.mediastack.lab | calibre-web.yourdomain.com | NAS_IP:8083
   # ═══════════════════════════════════════════════════════════════════════════
   calibre-web:
     image: lscr.io/linuxserver/calibre-web:latest
@@ -417,6 +417,8 @@ services:
     networks:
       arr-stack:
         ipv4_address: 172.20.0.10
+    ports:
+      - "8083:8083"  # Local network access
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
