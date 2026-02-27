@@ -62,6 +62,18 @@ services:
       retries: 3
       start_period: 60s
 
+  whoami:
+    image: traefik/whoami
+    ports:
+      - 8088:80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.mediastack.lab`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.whoami.tls=false"
+    networks:
+      - traefik-lan
+
 networks:
   arr-stack:
     external: true
