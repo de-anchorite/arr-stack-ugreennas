@@ -170,24 +170,24 @@ services:
   # webhook notifications when newer image versions are available on registries.
   # No web UI. Configure DIUN_WEBHOOK_URL in .env to receive alerts.
   # ═══════════════════════════════════════════════════════════════════════════
-  diun:
-    image: crazymax/diun:4.31.0
-    container_name: diun
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${CONFIG_ROOT}/diun:/data
-    networks:
-      arr-stack:
-        ipv4_address: 172.20.0.16
-    environment:
-      - TZ=${TZ}
-      - DIUN_WATCH_WORKERS=5
-      - DIUN_WATCH_SCHEDULE=${DIUN_SCHEDULE:-0 6 * * *}
-      - DIUN_PROVIDERS_DOCKER=true
-      - DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT=true
-      - DIUN_NOTIF_WEBHOOK_ENDPOINT=${DIUN_WEBHOOK_URL}
-      - DIUN_NOTIF_WEBHOOK_METHOD=POST
-      - DIUN_NOTIF_WEBHOOK_HEADERS_0_NAME=Content-Type
-      - DIUN_NOTIF_WEBHOOK_HEADERS_0_VALUE=application/json
-    logging: *default-logging
+  # diun:
+  #   image: crazymax/diun:4.31.0
+  #   container_name: diun
+  #   restart: always
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - ${CONFIG_ROOT}/diun:/data
+  #   networks:
+  #     arr-stack:
+  #       ipv4_address: 172.20.0.16
+  #   environment:
+  #     - TZ=${TZ}
+  #     - DIUN_WATCH_WORKERS=5
+  #     - DIUN_WATCH_SCHEDULE=${DIUN_SCHEDULE:-0 6 * * *}
+  #     - DIUN_PROVIDERS_DOCKER=true
+  #     - DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT=true
+  #     - DIUN_NOTIF_WEBHOOK_ENDPOINT=${DIUN_WEBHOOK_URL}
+  #     - DIUN_NOTIF_WEBHOOK_METHOD=POST
+  #     - DIUN_NOTIF_WEBHOOK_HEADERS_0_NAME=Content-Type
+  #     - DIUN_NOTIF_WEBHOOK_HEADERS_0_VALUE=application/json
+  #   logging: *default-logging
