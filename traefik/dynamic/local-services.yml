@@ -94,6 +94,11 @@ http:
       entryPoints: [web]
       service: beszel-lan
 
+    whoami-lan:
+      rule: "Host(`whoami.mediastack.lab`)"
+      entryPoints: [web]
+      service: whoami-lan
+
   middlewares:
     jellyseerr-redirect:
       redirectRegex:
@@ -175,3 +180,9 @@ http:
       loadBalancer:
         servers:
           - url: "http://172.20.0.15:8090"
+
+    whoami-lan:
+      loadBalancer:
+        servers:
+          - url: "http://172.20.0.16:8088"
+          
