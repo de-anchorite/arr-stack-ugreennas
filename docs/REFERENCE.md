@@ -127,6 +127,8 @@ docker compose -f docker-compose.arr-stack.yml up -d
 | vpn-net | 10.8.1.0/24 | Internal VPN routing (WireGuard peers) |
 | traefik-lan | (your LAN)/24 | macvlan for .lan domains (+ local DNS only) |
 
+> **Note:** `docker compose up` shows these as `arr-stack`, `arr-stack_vpn-net`, and `arr-stack_traefik-lan`. The `arr-stack_` prefix is normal — Docker adds the project name to networks that don't have an explicit `name:` set.
+
 ## Startup Order
 
 Services start in dependency order (handled automatically by `depends_on`):
