@@ -67,11 +67,6 @@ services:
     container_name: whoami
     ports:
       - 8088:8088
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`whoami.mediastack.lab`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
-      - "traefik.http.routers.whoami.tls=false"
     networks:
       arr-stack:
         ipv4_address: 172.20.0.16
