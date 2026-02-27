@@ -184,5 +184,5 @@ http:
     whoami-lan:
       loadBalancer:
         servers:
-          - url: "http://172.20.0.16:8080"
+          - url: "http://172.20.0.16:80"
           
