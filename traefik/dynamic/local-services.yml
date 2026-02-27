@@ -22,6 +22,11 @@ http:
       entryPoints: [web]
       service: seerr-lan
 
+    calibre-lan:
+      rule: "Host(`calibre.mediastack.lab`)"
+      entryPoints: [web]
+      service: calibre-lan
+
     # Legacy redirects (jellyseerr/jellyseer → seerr)
     jellyseerr-lan:
       rule: "Host(`jellyseerr.mediastack.lab`)"
