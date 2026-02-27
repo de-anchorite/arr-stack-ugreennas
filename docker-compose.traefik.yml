@@ -74,7 +74,7 @@ services:
       - "traefik.http.routers.whoami.tls=false"
     networks:
       arr-stack:
-        ipv4_address: 172.20.0.14
+        ipv4_address: 172.20.0.16
 
 networks:
   arr-stack:
