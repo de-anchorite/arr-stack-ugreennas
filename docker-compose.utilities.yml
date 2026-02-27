@@ -5,14 +5,6 @@
 # These services are useful but not required for the media stack.
 # Deploy with: docker compose -f docker-compose.utilities.yml up -d
 
-#########################
-# Volumes               #
-#########################
-volumes:
-  duc-index:
-  uptime-kuma-data:
-  beszel-data:
-  diun-data:
 
 #########################
 # Networks              #
@@ -78,7 +70,7 @@ services:
       arr-stack:
         ipv4_address: 172.20.0.13  # For monitoring other containers
     volumes:
-      - uptime-kuma-data:/app/data
+      - ${CONFIG_ROOT}/uptime-kuma:/app/data
       - /var/run/docker.sock:/var/run/docker.sock:ro  # For Docker container monitoring
     logging: *default-logging
     healthcheck:
@@ -101,7 +93,7 @@ services:
         ipv4_address: 172.20.0.14
     volumes:
       - /volume1:/scan/volume1:ro      # NAS data (read-only)
-      - duc-index:/database            # Persistent index
+      - ${CONFIG_ROOT}/duc:/database   # Persistent index
     ports:
       - "8838:80"                      # Local network access only
     environment:
@@ -144,7 +136,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
-      - beszel-data:/beszel_data
+      - ${CONFIG_ROOT}/beszel:/beszel_data
     environment:
       - TZ=${TZ}
     logging: *default-logging
@@ -184,7 +176,7 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - diun-data:/data
+      - ${CONFIG_ROOT}/diun:/data
     networks:
       arr-stack:
         ipv4_address: 172.20.0.16
