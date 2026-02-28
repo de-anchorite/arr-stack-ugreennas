@@ -241,7 +241,7 @@ services:
     restart: always
     logging: *default-logging
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:32400/status/sessions"]
+      test: ["CMD", "curl", "--connect-timeout", "15", "--silent", "--show-error", "--fail", "http://localhost:32400/identity"]
       interval: 1m
       timeout: 30s
       retries: 2
@@ -398,7 +398,7 @@ services:
     restart: always
     logging: *default-logging
     healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:5299/ && wget -q --spider --timeout=5 http://www.google.com"]
+      test: ["CMD-SHELL", "curl -sf http://localhost:5299/ && curl -sf http://www.google.com/"]
       interval: 2m
       timeout: 15s
       retries: 2
