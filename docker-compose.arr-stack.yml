@@ -419,11 +419,12 @@ services:
       arr-stack:
         ipv4_address: 172.20.0.10
     ports:
-      - "8083:8083"  # Local network access
+      - "8083:8083"
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
+      - DOCKER_MODS=linuxserver/mods:universal-calibre
     volumes:
       - ${CONFIG_ROOT}/calibre-web:/config
       - ${MEDIA_ROOT}/books:/books
