@@ -405,11 +405,11 @@ services:
       start_period: 60s
 
   # ═══════════════════════════════════════════════════════════════════════════
-  # Calibre Web - Ebook Library Web UI
+  # Calibre Web - Automated - Ebook Library Web UI
   # Access: calibre-web.mediastack.lab | calibre-web.yourdomain.com | NAS_IP:8083
   # ═══════════════════════════════════════════════════════════════════════════
   calibre-web:
-    image: lscr.io/linuxserver/calibre-web:latest
+    image: crocodilestick/calibre-web-automated:latest
     container_name: calibre-web
     depends_on:
       gluetun:
@@ -424,10 +424,9 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-      - DOCKER_MODS=linuxserver/mods:universal-calibre
     volumes:
       - ${CONFIG_ROOT}/calibre-web:/config
-      - ${MEDIA_ROOT}/books:/books
+      - ${MEDIA_ROOT}/books:/calibre-library
     labels:
       - deunhealth.restart.on.unhealthy=true
     restart: always
