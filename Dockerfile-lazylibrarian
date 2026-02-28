@@ -1,0 +1,4 @@
+FROM lscr.io/linuxserver/lazylibrarian:latest
+
+RUN apt-get update && apt-get install -y --fix-missing calibre ffmpeg
+

@@ -377,7 +377,10 @@ services:
   # Access: lazylibrarian.mediastack.lab | lazylibrarian.yourdomain.com | NAS_IP:5299
   # ═══════════════════════════════════════════════════════════════════════════
   lazylibrarian:
-    image: lscr.io/linuxserver/lazylibrarian:latest
+    build:
+      dockerfile: Dockerfile-lazylibrarian
+      context: .
+    #image: lscr.io/linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
     network_mode: "service:gluetun"
     depends_on:
@@ -388,7 +391,7 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-      - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg
+      # - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg
     volumes:
       - ${CONFIG_ROOT}/lazylibrarian:/config
       - ${MEDIA_ROOT}:/data
