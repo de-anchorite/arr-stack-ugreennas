@@ -116,9 +116,9 @@ http:
     plex-host-override:
       headers:
         customRequestHeaders:
-          Host: `{{ env "TRAEFIK_LAN_IP" }}`
-          Referer: `{{ env "TRAEFIK_LAN_IP" }}`
-          Origin: `http://{{ env "TRAEFIK_LAN_IP" }}`
+          Host: '{{ env "TRAEFIK_LAN_IP" }}'
+          Referer: '{{ env "TRAEFIK_LAN_IP" }}'
+          Origin: 'http://{{ env "TRAEFIK_LAN_IP" }}'
 
   services:
     # === Media Services ===
