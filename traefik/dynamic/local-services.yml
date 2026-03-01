@@ -12,10 +12,10 @@
 http:
   routers:
     # === Media Services ===
-    # plex-lan:
-    #   rule: "Host(`plex.mediastack.lab`)"
-    #   entryPoints: [web]
-    #   service: plex-lan
+    plex-lan:
+      rule: "Host(`plex.mediastack.lab`)"
+      entryPoints: [web]
+      service: plex-lan
 
     seerr-lan:
       rule: "Host(`seerr.mediastack.lab`)"
@@ -114,10 +114,10 @@ http:
 
   services:
     # === Media Services ===
-    # plex-lan:
-    #   loadBalancer:
-    #     servers:
-    #       - url: "http://172.20.0.4:32400"
+    plex-lan:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.102:32400"
 
     calibre-lan:
       loadBalancer:
