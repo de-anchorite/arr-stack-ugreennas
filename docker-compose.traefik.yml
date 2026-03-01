@@ -67,11 +67,6 @@ services:
   whoami:
     image: traefik/whoami
     container_name: whoami
-    environment:
-      - WHOAMI_NAME=plex.mediastack.lab
-      - WHOAMI_PORT_NUMBER=32400
-    ports:
-      - 32400:32400
     networks:
       arr-stack:
         ipv4_address: 172.20.0.16

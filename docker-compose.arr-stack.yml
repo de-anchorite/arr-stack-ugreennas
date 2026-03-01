@@ -220,14 +220,14 @@ services:
       - PGID=${PGID}
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
-      - ADVERTISE_IP=http://${NAS_IP}:32400
+      - ADVERTISE_IP=http://${NAS_IP}
     volumes:
       - ${CONFIG_ROOT}/plex:/config
       - ${MEDIA_ROOT}/tv:/tv
       - ${MEDIA_ROOT}/movies:/movies
       - ${MEDIA_ROOT}/music:/music
     ports:
-      # - "32400:32400"   # Web UI
+      - "32400:80"   # Web UI
       - "1900:1900/udp" # DLNA
       - "8324:8324"     # Plex Companion (remote control)
       - "32410:32410/udp" # GDM network discovery

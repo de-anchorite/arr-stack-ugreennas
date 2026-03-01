@@ -113,20 +113,6 @@ http:
         replacement: "http://seerr.mediastack.lab${1}"
         permanent: true
 
-    plex-host-override:
-      headers:
-        customRequestHeaders:
-          Host: '{{ env "NAS_IP" }}:32400'
-          Referer: ''
-          Origin: ''
-          X-Forwarded-Host: ''
-          X-Forwarded-Server: ''
-          X-Forwarded-For: ''
-          X-Forwarded-Port: ''
-          X-Forwarded-Proto: ''
-          X-Real-IP: ''
-          # RemoteAddr: 
-
   services:
     # === Media Services ===
     plex-lan:
@@ -205,5 +191,5 @@ http:
     whoami-lan:
       loadBalancer:
         servers:
-          - url: "http://172.20.0.16:32400"
+          - url: "http://172.20.0.16:80"
           
