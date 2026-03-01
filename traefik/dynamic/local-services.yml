@@ -132,7 +132,7 @@ http:
     plex-lan:
       loadBalancer:
         servers:
-          - url: "http://172.20.0.4:32400"
+          - url: "http://172.20.0.16:32400" # "http://172.20.0.4:32400"
 
     calibre-lan:
       loadBalancer:
