@@ -125,13 +125,14 @@ http:
           X-Forwarded-Port: ''
           X-Forwarded-Proto: ''
           X-Real-IP: ''
+          RemoteAddr: 
 
   services:
     # === Media Services ===
     plex-lan:
       loadBalancer:
         servers:
-          - url: "http://172.20.0.16:32400" # "http://172.20.0.4:32400"
+          - url: "http://172.20.0.4:32400"
 
     calibre-lan:
       loadBalancer:
@@ -204,5 +205,5 @@ http:
     whoami-lan:
       loadBalancer:
         servers:
-          - url: "http://172.20.0.16:80"
+          - url: "http://172.20.0.16:32400"
           
