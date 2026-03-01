@@ -124,6 +124,8 @@ http:
           X-Forwarded-For: '{{ env "NAS_IP" }}'
           X-Forwarded-Port: '32400'
           X-Real-IP: '{{ env "NAS_IP" }}'
+        customResponseHeaders:
+          X-Forwarded-For: '{{ env "NAS_IP" }}'
 
   services:
     # === Media Services ===
