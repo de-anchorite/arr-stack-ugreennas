@@ -119,6 +119,7 @@ http:
           Host: '{{ env "TRAEFIK_LAN_IP" }}'
           Referer: '{{ env "TRAEFIK_LAN_IP" }}'
           Origin: 'http://{{ env "TRAEFIK_LAN_IP" }}'
+          X-Forwarded-Host: '{{ env "TRAEFIK_LAN_IP" }}'
 
   services:
     # === Media Services ===
