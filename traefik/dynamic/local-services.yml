@@ -117,7 +117,7 @@ http:
     plex-lan:
       loadBalancer:
         servers:
-          - url: 'http://`{{ env "PLEX_LAN_IP" }}`:32400'
+          - url: "http://192.168.1.102:32400"
 
     calibre-lan:
       loadBalancer:
