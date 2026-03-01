@@ -220,7 +220,7 @@ services:
       - PGID=${PGID}
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
-      - ADVERTISE_IP=https://plex.${DOMAIN}/
+      - ADVERTISE_IP=http://${NAS_IP}:32400
     volumes:
       - ${CONFIG_ROOT}/plex:/config
       - ${MEDIA_ROOT}/tv:/tv
