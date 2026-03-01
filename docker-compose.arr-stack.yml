@@ -215,16 +215,13 @@ services:
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
-    extra_hosts:
-      - "plex.mediastack.lab:127.0.0.1"
-      - "plex:127.0.0.1"
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
       - HOSTNAME=plex.mediastack.lab
-      - ADVERTISE_IP=http://${NAS_IP}
+      - ADVERTISE_IP=http://${NAS_IP},http://192.168.1.102
     volumes:
       - ${CONFIG_ROOT}/plex:/config
       - ${CONFIG_ROOT}/plex-transcode:/transcode
@@ -243,6 +240,9 @@ services:
     networks:
       arr-stack:
         ipv4_address: 172.20.0.4
+        traefik-lan:
+          ipv4_address: 192.168.1.102
+          mac_address: "02:42:c0:a8:01:66"
     restart: always
     logging: *default-logging
     healthcheck:
