@@ -26,7 +26,7 @@ services:
       - ./cloudflared:/home/nonroot/.cloudflared:ro
     networks:
       arr-stack:
-        ipv4_address: 172.20.0.12
+        ipv4_address: 172.20.0.20
     healthcheck:
       test: ["CMD", "cloudflared", "tunnel", "info", "nas-tunnel"]
       interval: 30s
