@@ -221,7 +221,7 @@ services:
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
       - HOSTNAME=plex.mediastack.lab
-      - ADVERTISE_IP=http://${NAS_IP},http://192.168.1.102
+      - ADVERTISE_IP=http://192.168.1.102
     volumes:
       - ${CONFIG_ROOT}/plex:/config
       - ${CONFIG_ROOT}/plex-transcode:/transcode
@@ -229,7 +229,7 @@ services:
       - ${MEDIA_ROOT}/movies:/movies
       - ${MEDIA_ROOT}/music:/music
     ports:
-      - "80:32400"   # Web UI
+      - "192.168.1.102:80:32400"   # Web UI
       - "1900:1900/udp" # DLNA
       - "8324:8324"     # Plex Companion (remote control)
       - "32410:32410/udp" # GDM network discovery
