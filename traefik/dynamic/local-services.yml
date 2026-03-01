@@ -15,6 +15,7 @@ http:
     plex-lan:
       rule: "Host(`plex.mediastack.lab`)"
       entryPoints: [web]
+      #middlewares: [plex-host-override]
       service: plex-lan
 
     seerr-lan:
@@ -102,6 +103,7 @@ http:
     whoami-lan:
       rule: "Host(`whoami.mediastack.lab`)"
       entryPoints: [web]
+      middlewares: [plex-host-override] # Host header override for testing
       service: whoami-lan
 
   middlewares:
@@ -110,6 +112,13 @@ http:
         regex: "^http://jellyseer{1,2}[.]mediastack[.]lab(.*)"
         replacement: "http://seerr.mediastack.lab${1}"
         permanent: true
+
+    plex-host-override:
+      headers:
+        customRequestHeaders:
+          Host: "${TRAEFIK_LAN_IP}"
+          Referer: "${TRAEFIK_LAN_IP}"
+          Origin: http://${TRAEFIK_LAN_IP}
 
   services:
     # === Media Services ===
