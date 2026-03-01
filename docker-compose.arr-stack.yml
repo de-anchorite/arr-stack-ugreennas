@@ -227,7 +227,7 @@ services:
       - ${MEDIA_ROOT}/movies:/movies
       - ${MEDIA_ROOT}/music:/music
     ports:
-      - "32400:32400"   # Web UI
+      # - "32400:32400"   # Web UI
       - "1900:1900/udp" # DLNA
       - "8324:8324"     # Plex Companion (remote control)
       - "32410:32410/udp" # GDM network discovery
