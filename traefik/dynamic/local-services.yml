@@ -116,16 +116,15 @@ http:
     plex-host-override:
       headers:
         customRequestHeaders:
-          Host: '{{ env "NAS_IP" }}'
-          Referer: '{{ env "NAS_IP" }}'
-          Origin: 'http://{{ env "NAS_IP" }}:32400'
-          X-Forwarded-Host: '{{ env "NAS_IP" }}'
-          X-Forwarded-Server: '{{ env "NAS_IP" }}'
-          X-Forwarded-For: '{{ env "NAS_IP" }}'
-          X-Forwarded-Port: '32400'
-          X-Real-IP: '{{ env "NAS_IP" }}'
-        customResponseHeaders:
-          X-Forwarded-For: '{{ env "NAS_IP" }}'
+          Host: '{{ env "NAS_IP" }}:32400'
+          Referer: ''
+          Origin: ''
+          X-Forwarded-Host: ''
+          X-Forwarded-Server: ''
+          X-Forwarded-For: ''
+          X-Forwarded-Port: ''
+          X-Forwarded-Proto: ''
+          X-Real-IP: ''
 
   services:
     # === Media Services ===
