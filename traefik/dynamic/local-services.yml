@@ -15,7 +15,7 @@ http:
     plex-lan:
       rule: "Host(`plex.mediastack.lab`)"
       entryPoints: [web]
-      #middlewares: [plex-host-override]
+      middlewares: [plex-host-override]
       service: plex-lan
 
     seerr-lan:
