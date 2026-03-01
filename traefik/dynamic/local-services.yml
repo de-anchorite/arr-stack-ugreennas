@@ -117,8 +117,8 @@ http:
       headers:
         customRequestHeaders:
           Host: '{{ env "NAS_IP" }}'
-          Referer: '{{ env "TRAEFIK_LAN_IP" }}'
-          Origin: 'http://{{ env "TRAEFIK_LAN_IP" }}'
+          Referer: '{{ env "NAS_IP" }}'
+          Origin: 'http://{{ env "NAS_IP" }}:32400'
           X-Forwarded-Host: '{{ env "NAS_IP" }}'
           X-Forwarded-Port: '32400'
 
