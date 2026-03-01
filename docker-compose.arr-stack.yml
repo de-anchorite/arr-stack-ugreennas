@@ -220,8 +220,8 @@ services:
       - PGID=${PGID}
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
-      - HOSTNAME=plex.mediastack.lab
-      - ADVERTISE_IP=http://192.168.1.102
+      - HOSTNAME=${PLEX_HOSTNAME}
+      - ADVERTISE_IP=http://${PLEX_LAN_IP}
     volumes:
       - ${CONFIG_ROOT}/plex:/config
       - ${CONFIG_ROOT}/plex-transcode:/transcode
@@ -240,8 +240,8 @@ services:
       arr-stack:
         ipv4_address: 172.20.0.4
       traefik-lan:
-        ipv4_address: 192.168.1.102
-        mac_address: "02:42:c0:a8:01:66"
+        ipv4_address: ${PLEX_LAN_IP}
+        mac_address: "${PLEX_LAN_MAC}"
     restart: always
     logging: *default-logging
     healthcheck:
