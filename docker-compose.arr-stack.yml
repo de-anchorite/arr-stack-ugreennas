@@ -240,9 +240,9 @@ services:
     networks:
       arr-stack:
         ipv4_address: 172.20.0.4
-        traefik-lan:
-          ipv4_address: 192.168.1.102
-          mac_address: "02:42:c0:a8:01:66"
+      traefik-lan:
+        ipv4_address: 192.168.1.102
+        mac_address: "02:42:c0:a8:01:66"
     restart: always
     logging: *default-logging
     healthcheck:
