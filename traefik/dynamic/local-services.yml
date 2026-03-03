@@ -102,7 +102,6 @@ http:
     whoami-lan:
       rule: "Host(`whoami.mediastack.lab`)"
       entryPoints: [web]
-      middlewares: [plex-host-override] # Host header override for testing
       service: whoami-lan
 
   middlewares:
