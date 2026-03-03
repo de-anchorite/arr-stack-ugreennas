@@ -27,19 +27,6 @@ http:
       entryPoints: [web]
       service: calibre-lan
 
-    # Legacy redirects (jellyseerr/jellyseer → seerr)
-    jellyseerr-lan:
-      rule: "Host(`jellyseerr.mediastack.lab`)"
-      entryPoints: [web]
-      middlewares: [jellyseerr-redirect]
-      service: seerr-lan
-
-    jellyseer-lan:
-      rule: "Host(`jellyseer.mediastack.lab`)"
-      entryPoints: [web]
-      middlewares: [jellyseerr-redirect]
-      service: seerr-lan
-
     # === *arr Stack (VPN-protected via Gluetun) ===
     sonarr-lan:
       rule: "Host(`sonarr.mediastack.lab`)"
@@ -103,13 +90,6 @@ http:
       rule: "Host(`whoami.mediastack.lab`)"
       entryPoints: [web]
       service: whoami-lan
-
-  middlewares:
-    jellyseerr-redirect:
-      redirectRegex:
-        regex: "^http://jellyseer{1,2}[.]mediastack[.]lab(.*)"
-        replacement: "http://seerr.mediastack.lab${1}"
-        permanent: true
 
   services:
     # === Media Services ===
