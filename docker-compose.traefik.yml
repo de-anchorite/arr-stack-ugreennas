@@ -40,6 +40,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik/traefik.yml:/traefik.yml:ro
       - ./traefik/dynamic:/dynamic:ro
+      - ${CONFIG_ROOT}/traefik/logs:/var/log/traefik # Logs stored on NAS for persistence
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=arr-stack"
