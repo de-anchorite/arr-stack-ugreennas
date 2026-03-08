@@ -53,6 +53,11 @@ http:
       entryPoints: [web]
       service: lidarr-lan
 
+    slskd-lan:
+      rule: "Host(`slskd.mediastack.lab`)"
+      entryPoints: [web]
+      service: slskd-lan
+
     lazylibrarian-lan:
       rule: "Host(`lazylibrarian.mediastack.lab`)"
       entryPoints: [web]
@@ -128,6 +133,11 @@ http:
       loadBalancer:
         servers:
           - url: "http://172.20.0.3:8686"
+
+    slskd-lan:
+      loadBalancer:
+        servers:
+          - url: "http://172.20.0.3:5030"
 
     lazylibrarian-lan:
       loadBalancer:
