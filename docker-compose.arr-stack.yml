@@ -404,7 +404,7 @@ services:
     restart: always
     logging: *default-logging
     healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:5030/ && wget -q --spider --timeout=5 http://www.google.com"]
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:5030/ && wget -q --spider --timeout=5 http://www.google.com"]
       interval: 2m
       timeout: 15s
       retries: 2
