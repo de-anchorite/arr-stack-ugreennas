@@ -385,6 +385,8 @@ services:
   slskd:
     image: slskd/slskd:latest
     container_name: slskd
+    user: 1000:1000
+    group: 10:10
     network_mode: "service:gluetun"
     depends_on:
       gluetun:
@@ -418,6 +420,8 @@ services:
     image: mrusse08/soularr:latest
     container_name: soularr
     network_mode: "service:gluetun"
+    user: 1000:1000
+    group: 10:10
     depends_on:
       gluetun:
         condition: service_healthy
