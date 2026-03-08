@@ -378,6 +378,39 @@ services:
       retries: 2
       start_period: 60s
 
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # SLSKD - Music P2P
+  # Access: slskd.mediastack.lab | slskd.yourdomain.com | NAS_IP:5030
+  # ═══════════════════════════════════════════════════════════════════════════
+  slskd:
+    image: slskd/slskd:latest
+    container_name: slskd
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - SLSKD_REMOTE_CONFIGURATION=true
+    volumes:
+      - ${CONFIG_ROOT}/slskd:/app
+      - ${MEDIA_ROOT}/downloads/slskd:/data/downloads/slskd  # Same mount as qBittorrent for hardlinks
+    labels:
+      - deunhealth.restart.on.unhealthy=true
+    restart: always
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:5030/ && wget -q --spider --timeout=5 http://www.google.com"]
+      interval: 2m
+      timeout: 15s
+      retries: 2
+      start_period: 60s
+
   # ═══════════════════════════════════════════════════════════════════════════
   # LazyLibrarian - Ebook & Audiobook manager. Automatically downloads books.
   # Access: lazylibrarian.mediastack.lab | lazylibrarian.yourdomain.com | NAS_IP:5299
