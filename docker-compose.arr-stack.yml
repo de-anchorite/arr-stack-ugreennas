@@ -392,9 +392,6 @@ services:
       gluetun:
         condition: service_healthy
         restart: true
-    ports:
-      - "5030:5030"  # Local network access
-      - "5031:5031"
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
