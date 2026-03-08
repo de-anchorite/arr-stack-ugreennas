@@ -377,8 +377,6 @@ services:
       timeout: 15s
       retries: 2
       start_period: 60s
-
-  
   
   # ═══════════════════════════════════════════════════════════════════════════
   # SLSKD - Music P2P
@@ -411,6 +409,35 @@ services:
       timeout: 15s
       retries: 2
       start_period: 60s
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # SOULARR - Music P2P
+  # Access: soularr.mediastack.lab | soularr.yourdomain.com | NAS_IP:5030
+  # ═══════════════════════════════════════════════════════════════════════════
+  soularr:
+    image: mrusse08/soularr:latest
+    container_name: soularr
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+      lidarr:
+        condition: service_healthy
+        restart: true
+      slskd:
+        condition: service_healthy
+        restart: true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - SCRIPT_INTERVAL=300
+    volumes:
+      - ${CONFIG_ROOT}/soularr:/data
+      - ${MEDIA_ROOT}/downloads/slskd/completed:/downloads
+    restart: always
+    logging: *default-logging
 
   # ═══════════════════════════════════════════════════════════════════════════
   # LazyLibrarian - Ebook & Audiobook manager. Automatically downloads books.
