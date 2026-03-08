@@ -400,6 +400,7 @@ services:
     volumes:
       - ${CONFIG_ROOT}/slskd:/app
       - ${MEDIA_ROOT}/downloads/slskd:/data/downloads/slskd  # Same mount as qBittorrent for hardlinks
+      - ${MEDIA_ROOT}/music:/data/music  # For seeding completed files
     labels:
       - deunhealth.restart.on.unhealthy=true
     restart: always
