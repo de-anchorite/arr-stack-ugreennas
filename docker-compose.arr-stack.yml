@@ -222,6 +222,7 @@ services:
       - PLEX_CLAIM=${PLEX_CLAIM}
       - HOSTNAME=${PLEX_HOSTNAME}
       - ADVERTISE_IP=http://${PLEX_LAN_IP}
+      - TZ=${TZ}
     volumes:
       - ${CONFIG_ROOT}/plex:/config
       - ${CONFIG_ROOT}/plex-transcode:/transcode
