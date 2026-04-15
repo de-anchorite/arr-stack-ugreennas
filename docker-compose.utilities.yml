@@ -186,6 +186,7 @@ services:
       - PLEX_APP_ID=eXf+f9ktw3CZ8i45OY468WxriOCtoFxuNPzVeDcAwfw=
       - LIDARR_API_KEY=${LIDARR_API_KEY}
       - ENCRYPTION_KEY=${SPOTIFY_2_PLEX_ENCRYPTION_KEY}
+      - SLSKD_API_KEY=${SLSKD_API_KEY}
     volumes:
       - ${CONFIG_ROOT}/spotify-to-plex:/app/config
     networks:
