@@ -20,6 +20,7 @@ name: cloudflared
 services:
   cloudflared:
     image: cloudflare/cloudflared:latest
+    pull_policy: always
     container_name: cloudflared
     command: tunnel --config /home/nonroot/.cloudflared/config.yml run
     volumes:

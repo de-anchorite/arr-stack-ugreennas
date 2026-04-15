@@ -45,6 +45,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   gluetun:
     image: qmcgaw/gluetun:latest
+    pull_policy: always
     container_name: gluetun
     cap_add:
       - NET_ADMIN
@@ -91,6 +92,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
+    pull_policy: always
     container_name: qbittorrent
     network_mode: "service:gluetun"
     depends_on:
@@ -123,6 +125,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
+    pull_policy: always
     container_name: sonarr
     network_mode: "service:gluetun"
     depends_on:
@@ -154,6 +157,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
+    pull_policy: always
     container_name: prowlarr
     network_mode: "service:gluetun"
     depends_on:
@@ -183,6 +187,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   radarr:
     image: lscr.io/linuxserver/radarr:latest
+    pull_policy: always
     container_name: radarr
     network_mode: "service:gluetun"
     depends_on:
@@ -214,6 +219,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   plex:
     image: lscr.io/linuxserver/plex:latest
+    pull_policy: always
     container_name: plex
     environment:
       - PUID=${PUID}
@@ -260,6 +266,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   seerr:
     image: ghcr.io/seerr-team/seerr:latest
+    pull_policy: always
     init: true
     container_name: seerr
     depends_on:
@@ -294,6 +301,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
+    pull_policy: always
     container_name: bazarr
     depends_on:
       gluetun:
@@ -327,6 +335,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
+    pull_policy: always
     container_name: flaresolverr
     network_mode: "service:gluetun"
     depends_on:
@@ -355,6 +364,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
+    pull_policy: always
     container_name: lidarr
     network_mode: "service:gluetun"
     depends_on:
@@ -385,6 +395,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   slskd:
     image: slskd/slskd:latest
+    pull_policy: always
     container_name: slskd
     user: 1000:1000
     network_mode: "service:gluetun"
@@ -418,6 +429,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   soularr:
     image: mrusse08/soularr:latest
+    pull_policy: always
     container_name: soularr
     network_mode: "service:gluetun"
     user: 1000:1000
@@ -483,6 +495,7 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   calibre-web:
     image: crocodilestick/calibre-web-automated:latest
+    pull_policy: always
     container_name: calibre-web
     depends_on:
       gluetun:

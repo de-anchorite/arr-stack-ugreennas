@@ -16,6 +16,7 @@
 services:
   traefik:
     image: traefik:latest
+    pull_policy: always
     container_name: traefik
     restart: always
     security_opt:
@@ -68,6 +69,7 @@ services:
 
   whoami:
     image: traefik/whoami
+    pull_policy: always
     container_name: whoami
     networks:
       arr-stack:

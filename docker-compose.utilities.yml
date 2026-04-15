@@ -39,7 +39,8 @@ services:
   # No web UI. Runs silently in background.
   # ═══════════════════════════════════════════════════════════════════════════
   deunhealth:
-    image: qmcgaw/deunhealth:v0.3.0
+    image: qmcgaw/deunhealth:latest
+    pull_policy: always
     container_name: deunhealth
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -59,7 +60,8 @@ services:
   # Access: uptime.lan | NAS_IP:3001 (LAN-only, use WireGuard for remote)
   # ═══════════════════════════════════════════════════════════════════════════
   uptime-kuma:
-    image: louislam/uptime-kuma:2
+    image: louislam/uptime-kuma:latest
+    pull_policy: always
     container_name: uptime-kuma
     restart: always
     ports:
@@ -86,7 +88,8 @@ services:
   # Note: Re-indexes daily at 4am. Manual: docker restart duc
   # ═══════════════════════════════════════════════════════════════════════════
   duc:
-    image: mkoestler/duc-service:v1.1.0
+    image: mkoestler/duc-service:latest
+    pull_policy: always
     container_name: duc
     networks:
       arr-stack:
@@ -125,7 +128,8 @@ services:
   # Access: beszel.lan | NAS_IP:8090 (LAN-only, use WireGuard for remote)
   # ═══════════════════════════════════════════════════════════════════════════
   beszel:
-    image: henrygd/beszel:0.18
+    image: henrygd/beszel:latest
+    pull_policy: always
     container_name: beszel
     restart: always
     ports:
@@ -148,7 +152,8 @@ services:
       start_period: 30s
 
   beszel-agent:
-    image: henrygd/beszel-agent:0.18
+    image: henrygd/beszel-agent:latest
+    pull_policy: always
     container_name: beszel-agent
     restart: always
     network_mode: host
@@ -167,6 +172,7 @@ services:
 
   spotify-to-plex:
     image: jjdenhertog/spotify-to-plex:latest
+    pull_policy: always
     container_name: spotify-to-plex
     restart: always
     ports:
