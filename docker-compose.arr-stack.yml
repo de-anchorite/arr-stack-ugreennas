@@ -397,7 +397,6 @@ services:
     image: slskd/slskd:latest
     pull_policy: always
     container_name: slskd
-    user: 1000:1000
     network_mode: "service:gluetun"
     depends_on:
       gluetun:
@@ -432,7 +431,6 @@ services:
     pull_policy: always
     container_name: soularr
     network_mode: "service:gluetun"
-    user: 1000:1000
     depends_on:
       gluetun:
         condition: service_healthy
