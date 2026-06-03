@@ -157,9 +157,9 @@ ssh your-username@nas-ip
 sudo apt-get update && sudo apt-get install -y git
 
 # Clone the repo
-cd /volume1/docker
+cd /volume2/docker
 sudo git clone https://github.com/Pharkie/arr-stack-ugreennas.git arr-stack  # or your fork
-sudo chown -R 1000:1000 /volume1/docker/arr-stack
+sudo chown -R 1000:1000 /volume2/docker/arr-stack
 ```
 
 **Note:** Use `sudo` for Docker commands on Ugreen NAS. Service configs are stored in Docker named volumes (auto-created on first run).
@@ -189,9 +189,9 @@ ssh your-username@nas-ip
 sudo synopkg install Git
 
 # Clone the repo
-cd /volume1/docker
+cd /volume2/docker
 sudo git clone https://github.com/Pharkie/arr-stack-ugreennas.git arr-stack  # or your fork
-sudo chown -R 1000:1000 /volume1/docker/arr-stack
+sudo chown -R 1000:1000 /volume2/docker/arr-stack
 ```
 
 </details>
@@ -243,7 +243,7 @@ sudo chown -R 1000:1000 /srv/docker/arr-stack
 
 The stack needs your media path, timezone, VPN credentials, and a few passwords. Everything goes in one `.env` file.
 
-> **Note:** From this point forward, all commands run **on your NAS via SSH**. If you closed your terminal, reconnect with `ssh your-username@nas-ip` and `cd /volume1/docker/arr-stack` (or your clone location). **UGOS users:** SSH may time out—re-enable in Control Panel → Terminal if needed.
+> **Note:** From this point forward, all commands run **on your NAS via SSH**. If you closed your terminal, reconnect with `ssh your-username@nas-ip` and `cd /volume2/docker/arr-stack` (or your clone location). **UGOS users:** SSH may time out—re-enable in Control Panel → Terminal if needed.
 
 ### 2.1 Copy the Main Configuration File
 

@@ -16,13 +16,13 @@ Read `.claude/config.local.md` first to get the hostname, user, and password.
 This is a Docker media stack for Ugreen NAS devices. Key paths:
 
 - **Local dev repo**: `/Users/adamknowles/dev/arr-stack-ugreennas/`
-- **NAS deploy path**: `/volume1/docker/arr-stack/`
+- **NAS deploy path**: `/volume2/docker/arr-stack/`
 
 When editing files that need to go on the NAS (like `pihole/02-local-dns.conf`), edit them **on the NAS**, not in this local repo.
 
 ## Cross-Stack: Therapy Stack
 
-A separate Docker Compose project (`therapy-stack`) runs on the same NAS at `/volume1/docker/therapy-stack/`. It has its own network (`therapy-net`, 172.21.0.0/24) but Baserow is also connected to the `arr-stack` network (static IP 172.20.0.20) so Traefik can route to it.
+A separate Docker Compose project (`therapy-stack`) runs on the same NAS at `/volume2/docker/therapy-stack/`. It has its own network (`therapy-net`, 172.21.0.0/24) but Baserow is also connected to the `arr-stack` network (static IP 172.20.0.20) so Traefik can route to it.
 
 **Files in this project that reference therapy-stack:**
 

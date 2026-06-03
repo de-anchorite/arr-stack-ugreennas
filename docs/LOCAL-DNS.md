@@ -40,7 +40,7 @@ The container uses a static IP with a fake MAC address (`TRAEFIK_LAN_MAC` in `.e
 > **Important:** You MUST create `traefik.yml` before deploying. If Docker can't find the file, it creates a directory instead, and Traefik fails to start.
 
 ```bash
-cd /volume1/docker/arr-stack
+cd /volume2/docker/arr-stack
 
 # Create Traefik config from example
 cp traefik/traefik.yml.example traefik/traefik.yml

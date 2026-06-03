@@ -80,10 +80,11 @@ This project uses **separate Docker Compose files** for each layer:
 
 ```
 /volume1/
-├── Media/
-│   ├── downloads/    # qBittorrent
-│   ├── tv/           # TV shows
-│   └── movies/       # Movies
+└── Media/
+    ├── downloads/    # qBittorrent
+    ├── tv/           # TV shows
+    └── movies/       # Movies
+/volume2/
 └── docker/
     └── arr-stack/
         ├── traefik/       # User-edited (bind mount)
@@ -205,7 +206,7 @@ The last two checks require SSH access to your NAS. They gracefully skip when:
 2. **Verify all image tags are pullable on the NAS** — a full tear-down and pull:
    ```bash
    # SSH to the NAS, then for each compose file being released:
-   cd /volume1/docker/arr-stack
+   cd /volume2/docker/arr-stack
    docker compose -f docker-compose.arr-stack.yml pull
    docker compose -f docker-compose.traefik.yml pull
    docker compose -f docker-compose.utilities.yml pull
