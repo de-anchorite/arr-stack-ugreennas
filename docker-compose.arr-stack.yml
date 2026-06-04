@@ -107,7 +107,7 @@ services:
       - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
     volumes:
       - ${CONFIG_ROOT}/qbittorrent:/config
-      - ${MEDIA_ROOT}/downloads:/downloads
+      - ${DOWNLOADS_ROOT}:/downloads
     labels:
       - deunhealth.restart.on.unhealthy=true
     restart: always
@@ -139,7 +139,7 @@ services:
     volumes:
       - ${CONFIG_ROOT}/sonarr:/config
       - ${MEDIA_ROOT}/tv:/tv
-      - ${MEDIA_ROOT}/downloads:/downloads
+      - ${DOWNLOADS_ROOT}:/downloads
     labels:
       - deunhealth.restart.on.unhealthy=true
     restart: always
@@ -201,7 +201,7 @@ services:
     volumes:
       - ${CONFIG_ROOT}/radarr:/config
       - ${MEDIA_ROOT}/movies:/movies
-      - ${MEDIA_ROOT}/downloads:/downloads
+      - ${DOWNLOADS_ROOT}:/downloads
     labels:
       - deunhealth.restart.on.unhealthy=true
     restart: always
@@ -377,7 +377,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ${CONFIG_ROOT}/lidarr:/config
-      - ${MEDIA_ROOT}:/data  # Same mount as qBittorrent for hardlinks
+      - ${MEDIA_ROOT}/music:/data/music
+      - ${DOWNLOADS_ROOT}:/data/downloads  # Same mount as qBittorrent for hardlinks
     labels:
       - deunhealth.restart.on.unhealthy=true
     restart: always
@@ -409,7 +410,7 @@ services:
       - SLSKD_REMOTE_CONFIGURATION=true
     volumes:
       - ${CONFIG_ROOT}/slskd:/app
-      - ${MEDIA_ROOT}/downloads/slskd:/data/downloads/slskd  # Same mount as qBittorrent for hardlinks
+      - ${DOWNLOADS_ROOT}/slskd:/data/downloads/slskd  # Same mount as qBittorrent for hardlinks
       - ${MEDIA_ROOT}/music:/data/music  # For seeding completed files
     labels:
       - deunhealth.restart.on.unhealthy=true
@@ -448,7 +449,7 @@ services:
       - SCRIPT_INTERVAL=300
     volumes:
       - ${CONFIG_ROOT}/soularr:/data
-      - ${MEDIA_ROOT}/downloads/slskd/completed:/downloads
+      - ${DOWNLOADS_ROOT}/slskd/completed:/downloads
     restart: always
     logging: *default-logging
 
@@ -474,7 +475,8 @@ services:
       # - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg
     volumes:
       - ${CONFIG_ROOT}/lazylibrarian:/config
-      - ${MEDIA_ROOT}:/data
+      - ${MEDIA_ROOT}/books:/data/books
+      - ${DOWNLOADS_ROOT}:/data/downloads
       - ${MEDIA_ROOT}/scripts/lazylibrarian:/home/scripts:rw
     labels:
       - deunhealth.restart.on.unhealthy=true
