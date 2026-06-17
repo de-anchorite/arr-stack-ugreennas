@@ -145,8 +145,8 @@ First, set up the folder structure for your media and get the files from this Gi
 Docker comes preinstalled on UGOS - no installation needed! Folders created via SSH don't appear in UGOS Files app, so create top-level folders via GUI.
 
 1. Open UGOS web interface → **Files** app
-2. Create shared folders: **Media**, **docker**
-3. Inside **Media**, create subfolders: **downloads**, **tv**, **movies**
+2. Create shared folders: **Media**, **docker**, **downloads**
+3. Inside **Media**, create subfolders: **tv**, **movies**
 4. Enable SSH: **Control Panel** → **Terminal** → toggle SSH on
 5. SSH into your NAS and install git:
 
@@ -178,7 +178,8 @@ Scanning media files for viruses is unnecessary - video/audio files can't contai
 <summary><strong>Synology / QNAP</strong></summary>
 
 Use File Station to create:
-- **Media** shared folder with subfolders: downloads, tv, movies
+- **Media** shared folder with subfolders: tv, movies
+- **downloads** shared folder
 - **docker** shared folder
 
 Then via SSH:
@@ -203,9 +204,10 @@ sudo chown -R 1000:1000 /volume2/docker/arr-stack
 # Install git if needed
 sudo apt-get update && sudo apt-get install -y git
 
-# Create media directories
-sudo mkdir -p /srv/media/{downloads,tv,movies}
-sudo chown -R 1000:1000 /srv/media
+# Create media and downloads directories
+sudo mkdir -p /srv/media/{tv,movies}
+sudo mkdir -p /srv/downloads
+sudo chown -R 1000:1000 /srv/media /srv/downloads
 
 # Clone the repo
 cd /srv/docker
@@ -221,10 +223,12 @@ sudo chown -R 1000:1000 /srv/docker/arr-stack
 
 ```
 /volume1/  (or /srv/)
-├── Media/
-│   ├── downloads/    # qBittorrent downloads
-│   ├── tv/           # TV shows (Sonarr → Jellyfin)
-│   └── movies/       # Movies (Radarr → Jellyfin)
+└── Media/
+    ├── tv/           # TV shows (Sonarr → Jellyfin)
+    └── movies/       # Movies (Radarr → Jellyfin)
+
+/volume2/  (or separate path)
+├── downloads/        # qBittorrent/SABnzbd downloads (DOWNLOADS_ROOT)
 └── docker/
     └── arr-stack/
         ├── traefik/              # + local DNS / + remote access only
@@ -251,15 +255,21 @@ The stack needs your media path, timezone, VPN credentials, and a few passwords.
 cp .env.example .env
 ```
 
-### 2.2 Media Storage Path
+### 2.2 Storage Paths
 
-Set `MEDIA_ROOT` in `.env` to match your media folder location:
+Set `MEDIA_ROOT` and `DOWNLOADS_ROOT` in `.env` to match your folder locations:
 
 ```bash
-# Examples:
+# Media root (TV, movies, music, books)
 MEDIA_ROOT=/volume1/Media     # Ugreen, Synology
 MEDIA_ROOT=/share/Media       # QNAP
 MEDIA_ROOT=/srv/media         # Linux server
+
+# Downloads root (qBittorrent/SABnzbd working directory)
+# Keeping this on a separate volume avoids antivirus scans on in-progress downloads
+DOWNLOADS_ROOT=/volume2/downloads   # Ugreen (separate volume)
+DOWNLOADS_ROOT=/share/downloads     # QNAP
+DOWNLOADS_ROOT=/srv/downloads       # Linux server
 ```
 
 Containers run as the user specified by PUID/PGID. This must match who owns your media folders:
@@ -516,8 +526,8 @@ Other *arr apps you can add to your Core stack:
        - TZ=${TZ}
      volumes:
        - lidarr-config:/config
-       - ${MEDIA_ROOT}/music:/music
-       - ${MEDIA_ROOT}/downloads:/downloads
+       - ${MEDIA_ROOT}/music:/data/music
+       - ${DOWNLOADS_ROOT}:/data/downloads
      restart: unless-stopped
    ```
 
