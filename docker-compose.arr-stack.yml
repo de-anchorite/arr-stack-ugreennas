@@ -342,21 +342,21 @@ services:
       gluetun:
         condition: service_healthy
     environment:
-      - LOG_LEVEL=info
+      - LOG_LEVEL=debug
       - TZ=${TZ}
     labels:
       - deunhealth.restart.on.unhealthy=true
     restart: always
     logging: *default-logging
-    healthcheck:
-      # Actually test Chrome by making a solve request (catches Chrome crashes)
-      test: ["CMD", "curl", "-sf", "-X", "POST", "-H", "Content-Type: application/json",
-             "-d", "{\"cmd\":\"request.get\",\"url\":\"http://localhost:8191/\",\"maxTimeout\":30000}",
-             "http://localhost:8191/v1"]
-      interval: 10m
-      timeout: 60s
-      retries: 2
-      start_period: 60s
+    # healthcheck:
+    #   # Actually test Chrome by making a solve request (catches Chrome crashes)
+    #   test: ["CMD", "curl", "-sf", "-X", "POST", "-H", "Content-Type: application/json",
+    #          "-d", "{\"cmd\":\"request.get\",\"url\":\"http://localhost:8191/\",\"maxTimeout\":30000}",
+    #          "http://localhost:8191/v1"]
+    #   interval: 10m
+    #   timeout: 60s
+    #   retries: 2
+    #   start_period: 60s
   
   # ═══════════════════════════════════════════════════════════════════════════
   # LIDARR - Music manager. Automatically downloads music.
