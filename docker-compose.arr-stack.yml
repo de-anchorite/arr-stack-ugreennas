@@ -334,7 +334,7 @@ services:
   # No web UI. Used internally by Prowlarr at localhost:8191
   # ═══════════════════════════════════════════════════════════════════════════
   flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:v3.5.1
+    image: ghcr.io/flaresolverr/flaresolverr:v3.4.6
     pull_policy: always
     container_name: flaresolverr
     network_mode: "service:gluetun"
