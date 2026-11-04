@@ -296,6 +296,45 @@ services:
       start_period: 20s
 
   # ═══════════════════════════════════════════════════════════════════════════
+  # AGREGARR - Media management.
+  # Access: agregarr.mediastack.lab | agregarr.yourdomain.com | NAS_IP:7171
+  # ═══════════════════════════════════════════════════════════════════════════
+  agregarr:
+    image: agregarr/agregarr:latest
+    pull_policy: always
+    init: true
+    container_name: agregarr
+    depends_on:
+      gluetun:
+        condition: service_healthy  # Needs gluetun to reach Sonarr/Radarr
+        restart: true
+    volumes:
+      - ${CONFIG_ROOT}/agregarr:/app/config 
+
+      # Optional: For Coming Soon/Placeholder feature
+      - ${MEDIA_ROOT}/placeholders/movies:/data/movies
+      - ${MEDIA_ROOT}/placeholders/tv:/data/tv
+
+      # And then select your root folders in Settings -> Downloads
+    environment:
+      - TZ=${TZ}
+    ports:
+      - 7171:7171
+    networks:
+      arr-stack:
+        ipv4_address: 172.20.0.11
+    restart: always
+    logging: *default-logging
+    labels:
+      - deunhealth.restart.on.unhealthy=true
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:7171/ && wget -q --spider --timeout=5 http://www.google.com"]
+      interval: 2m
+      timeout: 15s
+      retries: 2
+      start_period: 60s
+
+  # ═══════════════════════════════════════════════════════════════════════════
   # BAZARR - Subtitle manager. Automatically downloads subtitles.
   # Access: bazarr.mediastack.lab | bazarr.yourdomain.com | NAS_IP:6767
   # ═══════════════════════════════════════════════════════════════════════════
