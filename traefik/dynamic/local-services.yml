@@ -17,6 +17,11 @@ http:
       entryPoints: [web]
       service: plex-lan
 
+    plex-plain-lan:
+      rule: "Host(`plex`)"
+      entryPoints: [web]
+      service: plex-lan
+
     seerr-lan:
       rule: "Host(`seerr.mediastack.lab`)"
       entryPoints: [web]
