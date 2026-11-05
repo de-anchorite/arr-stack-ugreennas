@@ -37,6 +37,11 @@ http:
       entryPoints: [web]
       service: agregarr-lan
 
+    tautulli-lan:
+      rule: "Host(`tautulli.mediastack.lab`)"
+      entryPoints: [web]
+      service: tautulli-lan
+
     # === *arr Stack (VPN-protected via Gluetun) ===
     sonarr-lan:
       rule: "Host(`sonarr.mediastack.lab`)"
@@ -127,6 +132,11 @@ http:
       loadBalancer:
         servers:
           - url: "http://172.20.0.11:7171"
+
+    tautulli-lan:
+      loadBalancer:
+        servers:
+          - url: "http://172.20.0.12:8181"
 
     # === *arr Stack (via Gluetun at 172.20.0.3) ===
     sonarr-lan:
