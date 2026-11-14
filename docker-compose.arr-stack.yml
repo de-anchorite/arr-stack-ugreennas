@@ -549,7 +549,7 @@ services:
       - Slskarr__Slskd__Url=http://localhost:5030
       - Slskarr__Slskd__ApiKey=${SLSKD_API_KEY}
       - Slskarr__DataPath=/data
-      - Slskarr__Slskd__DownloadsPath=/downloads/slskd
+      - Slskarr__Slskd__DownloadsPath=/downloads/slskd/completed
     volumes:
       - ${CONFIG_ROOT}/slskarr:/data
       - ${DOWNLOADS_ROOT}:/downloads
