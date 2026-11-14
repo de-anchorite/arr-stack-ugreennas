@@ -536,6 +536,7 @@ services:
     pull_policy: always
     container_name: slskarr
     network_mode: "service:gluetun"
+    user: "${PUID}:${PGID}"
     depends_on:
       gluetun:
         condition: service_healthy
