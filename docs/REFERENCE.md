@@ -33,7 +33,7 @@
 | Uptime Kuma | `NAS_IP:3001` | `http://uptime.lan` | — |
 | duc | `NAS_IP:8838` | `http://duc.lan` | — |
 | Beszel | `NAS_IP:8090` | `http://beszel.lan` | — |
-| Spotify-to-Plex | `NAS_IP:9030` | — | — |
+
 
 **Legend:**
 - **Core** — Always works on your LAN
@@ -87,7 +87,6 @@
 | duc | 172.20.0.14 | 8838 | Disk usage analyzer |
 | Beszel | 172.20.0.15 | 8090 | System monitoring |
 | beszel-agent | host network | 45876 | Beszel metrics collector (no UI) |
-| Spotify-to-Plex | 172.20.0.17 | 9030 | Spotify playlist sync |
 
 ### Service Connection Guide
 
@@ -207,4 +206,3 @@ Services start in dependency order (handled automatically by `depends_on`):
 | duc | Disk usage treemap |
 | Beszel | System metrics (CPU, RAM, disk, containers) |
 | beszel-agent | Metrics collector for Beszel |
-| Spotify-to-Plex | Sync Spotify playlists to Plex |
