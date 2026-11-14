@@ -567,7 +567,7 @@ services:
   # Access: chaptarr.mediastack.lab | NAS_IP:8789
   # ═══════════════════════════════════════════════════════════════════════════
   chaptarr:
-    image: chaptarr/chaptarr:latest
+    image: chaptarr/chaptarr:develop
     pull_policy: always
     container_name: chaptarr
     network_mode: "service:gluetun"
