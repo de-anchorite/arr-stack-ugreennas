@@ -78,6 +78,16 @@ http:
       entryPoints: [web]
       service: lazylibrarian-lan
 
+    chaptarr-lan:
+      rule: "Host(`chaptarr.mediastack.lab`)"
+      entryPoints: [web]
+      service: chaptarr-lan
+
+    calibre-server-lan:
+      rule: "Host(`calibre-server.mediastack.lab`)"
+      entryPoints: [web]
+      service: calibre-server-lan
+
     # === Download Clients ===
     qbit-lan:
       rule: "Host(`qbit.mediastack.lab`)"
@@ -168,6 +178,16 @@ http:
       loadBalancer:
         servers:
           - url: "http://172.20.0.3:5299"
+
+    chaptarr-lan:
+      loadBalancer:
+        servers:
+          - url: "http://172.20.0.3:8789"
+
+    calibre-server-lan:
+      loadBalancer:
+        servers:
+          - url: "http://172.20.0.17:8080"
 
     bazarr-lan:
       loadBalancer:
