@@ -582,7 +582,7 @@ services:
     volumes:
       - ${CONFIG_ROOT}/chaptarr:/config
       - ${MEDIA_ROOT}/books:/data/books
-      - ${DOWNLOADS_ROOT}:/data/downloads
+      - ${DOWNLOADS_ROOT}:/downloads
     labels:
       - deunhealth.restart.on.unhealthy=true
     restart: always
