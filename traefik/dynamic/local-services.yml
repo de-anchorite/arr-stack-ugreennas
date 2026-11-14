@@ -14,111 +14,111 @@ http:
     # === Media Services ===
     plex-lan:
       rule: "Host(`plex.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: plex-lan
 
     plex-plain-lan:
       rule: "Host(`plex`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: plex-lan
 
     seerr-lan:
       rule: "Host(`seerr.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: seerr-lan
 
     calibre-lan:
       rule: "Host(`calibre.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: calibre-lan
 
     agregarr-lan:
       rule: "Host(`agregarr.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: agregarr-lan
 
     tautulli-lan:
       rule: "Host(`tautulli.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: tautulli-lan
 
     # === *arr Stack (VPN-protected via Gluetun) ===
     sonarr-lan:
       rule: "Host(`sonarr.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: sonarr-lan
 
     radarr-lan:
       rule: "Host(`radarr.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: radarr-lan
 
     prowlarr-lan:
       rule: "Host(`prowlarr.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: prowlarr-lan
 
     bazarr-lan:
       rule: "Host(`bazarr.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: bazarr-lan
 
     lidarr-lan:
       rule: "Host(`lidarr.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: lidarr-lan
 
     slskd-lan:
       rule: "Host(`slskd.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: slskd-lan
 
     lazylibrarian-lan:
       rule: "Host(`lazylibrarian.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: lazylibrarian-lan
 
     chaptarr-lan:
       rule: "Host(`chaptarr.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: chaptarr-lan
 
     calibre-server-lan:
       rule: "Host(`calibre-server.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: calibre-server-lan
 
     # === Download Clients ===
     qbit-lan:
       rule: "Host(`qbit.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: qbit-lan
 
     # === Infrastructure ===
     traefik-lan:
       rule: "Host(`traefik.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: api@internal
 
     # === Utilities ===
     uptime-lan:
       rule: "Host(`uptime.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: uptime-lan
 
     duc-lan:
       rule: "Host(`duc.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: duc-lan
 
     beszel-lan:
       rule: "Host(`beszel.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: beszel-lan
 
     whoami-lan:
       rule: "Host(`whoami.mediastack.lab`)"
-      entryPoints: [web]
+      entryPoints: [web, websecure]
       service: whoami-lan
 
   services:

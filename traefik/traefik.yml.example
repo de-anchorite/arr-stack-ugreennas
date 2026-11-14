@@ -16,8 +16,13 @@ api:
 entryPoints:
   web:
     address: ":80"
-    # HTTP only - Cloudflare Tunnel handles SSL for external access
-    # .lan domains use HTTP (no SSL needed for local traffic)
+
+  websecure:
+    address: ":443"
+    http:
+      tls: {}
+    # Self-signed cert — browser warnings expected for .mediastack.lab domains
+    # Cloudflare Tunnel handles proper SSL for external access
 
 # Providers
 providers:
