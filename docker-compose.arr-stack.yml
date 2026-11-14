@@ -69,6 +69,7 @@ services:
       - "8989:8989"   # Sonarr
       - "7878:7878"   # Radarr
       - "8686:8686"   # Lidarr
+      - "8080:8080"   # Slskarr
       - "8789:8789"   # Chaptarr
       - "9696:9696"   # Prowlarr
       - "8085:8085"   # qBittorrent
@@ -523,6 +524,42 @@ services:
       - ${DOWNLOADS_ROOT}/slskd/completed:/downloads
     restart: always
     logging: *default-logging
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # SLSKARR - Bridges Chaptarr to Soulseek via slskd.
+  # Presents as a Newznab indexer + SABnzbd download client to Chaptarr.
+  # In Chaptarr: add as Newznab indexer AND SABnzbd client at localhost:8080
+  # Access: slskarr.mediastack.lab | NAS_IP:8080
+  # ═══════════════════════════════════════════════════════════════════════════
+  slskarr:
+    image: ghcr.io/de-anchorite/slskarr:latest
+    pull_policy: always
+    container_name: slskarr
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+      slskd:
+        condition: service_healthy
+        restart: true
+    environment:
+      - TZ=${TZ}
+      - Slskarr__Slskd__Url=http://localhost:5030
+      - Slskarr__Slskd__ApiKey=${SLSKD_API_KEY}
+      - Slskarr__DataPath=/data
+      - Slskarr__Slskd__DownloadsPath=/downloads/slskd
+    volumes:
+      - ${CONFIG_ROOT}/slskarr:/data
+      - ${DOWNLOADS_ROOT}:/downloads
+    restart: always
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8080/"]
+      interval: 2m
+      timeout: 10s
+      retries: 2
+      start_period: 30s
 
   # ═══════════════════════════════════════════════════════════════════════════
   # CHAPTARR - Ebook & Audiobook collection manager (Readarr successor).

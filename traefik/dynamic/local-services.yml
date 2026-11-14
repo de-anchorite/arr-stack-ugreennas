@@ -68,6 +68,11 @@ http:
       entryPoints: [web, websecure]
       service: slskd-lan
 
+    slskarr-lan:
+      rule: "Host(`slskarr.mediastack.lab`)"
+      entryPoints: [web, websecure]
+      service: slskarr-lan
+
     chaptarr-lan:
       rule: "Host(`chaptarr.mediastack.lab`)"
       entryPoints: [web, websecure]
@@ -180,7 +185,7 @@ http:
         servers:
           - url: "http://172.20.0.3:8085"
 
-    sabnzbd-lan:
+    slskarr-lan:
       loadBalancer:
         servers:
           - url: "http://172.20.0.3:8080"
