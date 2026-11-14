@@ -110,7 +110,7 @@ arr-stack network (172.20.0.0/24)
 ────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-> **Note:** `.5`–`.7`, `.19` are unassigned. `.20` is also used by Baserow (therapy-stack) when connected to this network for Traefik routing.
+> **Note:** `.5`–`.7`, `.19` are unassigned.
 
 ## Access Levels
 
