@@ -80,22 +80,38 @@ All services run on the `arr-stack` network with static IPs:
 
 ```
 arr-stack network (172.20.0.0/24)
-───────────────────────────────────────────────────────────────────────────────────
-│ IP           │ Service      │ Notes                          │ Required for     │
-├──────────────┼──────────────┼────────────────────────────────┼──────────────────│
-│ 172.20.0.3   │ Gluetun      │ VPN gateway + arr services     │ Core             │
-│ 172.20.0.4   │ Jellyfin     │ Media server                   │ Core             │
-│ 172.20.0.8   │ Seerr        │ Request portal                 │ Core             │
-│ 172.20.0.9   │ Bazarr       │ Subtitles                      │ Core             │
-│ 172.20.0.5   │ Pi-hole      │ DNS server                     │ Core             │
-│ 172.20.0.2   │ Traefik      │ Reverse proxy                  │ + local DNS      │
-│ 172.20.0.12  │ Cloudflared  │ Tunnel to Cloudflare           │ + remote access  │
-│ 172.20.0.13  │ Uptime Kuma  │ Monitoring                     │ Optional         │
-│ 172.20.0.14  │ duc          │ Disk usage                     │ Optional         │
-│ 172.20.0.15  │ Beszel       │ System monitoring              │ Optional         │
-│ 172.20.0.16  │ DIUN         │ Image update notifier          │ Optional         │
-───────────────────────────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────────────────────────────────
+│ IP           │ Service            │ Port(s)              │ Compose file     │
+├──────────────┼────────────────────┼──────────────────────┼──────────────────┤
+│ 172.20.0.2   │ Traefik            │ 80 (macvlan) / 9090  │ traefik.yml      │
+│ 172.20.0.3   │ Gluetun            │ — (VPN gateway)      │ arr-stack.yml    │
+│   (via .3)   │ ↳ qBittorrent      │ 8085                 │ arr-stack.yml    │
+│   (via .3)   │ ↳ Sonarr           │ 8989                 │ arr-stack.yml    │
+│   (via .3)   │ ↳ Radarr           │ 7878                 │ arr-stack.yml    │
+│   (via .3)   │ ↳ Prowlarr         │ 9696                 │ arr-stack.yml    │
+│   (via .3)   │ ↳ Lidarr           │ 8686                 │ arr-stack.yml    │
+│   (via .3)   │ ↳ slskd            │ 5030                 │ arr-stack.yml    │
+│   (via .3)   │ ↳ Soularr          │ — (no UI)            │ arr-stack.yml    │
+│   (via .3)   │ ↳ LazyLibrarian    │ 5299                 │ arr-stack.yml    │
+│   (via .3)   │ ↳ Chaptarr         │ 8789                 │ arr-stack.yml    │
+│   (via .3)   │ ↳ FlareSolverr     │ 8191 (no UI)         │ arr-stack.yml    │
+│ 172.20.0.4   │ Plex               │ 32400                │ arr-stack.yml    │
+│ 172.20.0.8   │ Seerr              │ 5055                 │ arr-stack.yml    │
+│ 172.20.0.9   │ Bazarr             │ 6767                 │ arr-stack.yml    │
+│ 172.20.0.10  │ Calibre-web (CWA)  │ 8083                 │ arr-stack.yml    │
+│ 172.20.0.11  │ Agregarr           │ 7171                 │ arr-stack.yml    │
+│ 172.20.0.12  │ Tautulli           │ 8181                 │ arr-stack.yml    │
+│ 172.20.0.13  │ Uptime Kuma        │ 3001                 │ utilities.yml    │
+│ 172.20.0.14  │ duc                │ 8838                 │ utilities.yml    │
+│ 172.20.0.15  │ Beszel             │ 8090                 │ utilities.yml    │
+│ 172.20.0.16  │ Whoami             │ 80                   │ traefik.yml      │
+│ 172.20.0.17  │ Spotify-to-Plex    │ 9030                 │ utilities.yml    │
+│ 172.20.0.18  │ Calibre Server     │ 8282 / 8084          │ arr-stack.yml    │
+│ 172.20.0.20  │ Cloudflared        │ — (no UI)            │ cloudflared.yml  │
+────────────────────────────────────────────────────────────────────────────────────────
 ```
+
+> **Note:** `.5`–`.7`, `.19` are unassigned. `.20` is also used by Baserow (therapy-stack) when connected to this network for Traefik routing.
 
 ## Access Levels
 

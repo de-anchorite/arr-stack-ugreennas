@@ -641,7 +641,7 @@ services:
     container_name: calibre-server
     networks:
       arr-stack:
-        ipv4_address: 172.20.0.17
+        ipv4_address: 172.20.0.18
     ports:
       - "8282:8080"  # Calibre GUI (KasmVNC)
       - "8084:8081"  # Calibre content server (enable in Calibre prefs first)
