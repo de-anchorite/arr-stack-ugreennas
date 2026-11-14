@@ -25,9 +25,7 @@
 | slskd | `NAS_IP:5030` | `http://slskd.lan` | — |
 | Agregarr | `NAS_IP:7171` | `http://agregarr.lan` | — |
 | Tautulli | `NAS_IP:8181` | `http://tautulli.lan` | — |
-| LazyLibrarian | `NAS_IP:5299` | `http://lazylibrarian.lan` | — |
 | Chaptarr | `NAS_IP:8789` | `http://chaptarr.lan` | — |
-| Calibre-web (CWA) | `NAS_IP:8083` | `http://calibre.lan` | — |
 | Calibre Server | `NAS_IP:8282` | `http://calibre-server.lan` | — |
 | Traefik | `NAS_IP:9090` | `http://traefik.lan` | — |
 | Uptime Kuma | `NAS_IP:3001` | `http://uptime.lan` | — |
@@ -54,13 +52,11 @@
 | ↳ Lidarr | (via Gluetun) | 8686 | Music management |
 | ↳ slskd | (via Gluetun) | 5030 | Soulseek client |
 | ↳ Soularr | (via Gluetun) | — | Lidarr/slskd bridge (no UI) |
-| ↳ LazyLibrarian | (via Gluetun) | 5299 | Ebook/audiobook manager |
 | ↳ Chaptarr | (via Gluetun) | 8789 | Ebook/audiobook manager |
 | ↳ FlareSolverr | (via Gluetun) | 8191 | Cloudflare bypass (no UI) |
 | Plex | 172.20.0.4 | 32400 | Media server |
 | Seerr | 172.20.0.8 | 5055 | Request management |
 | Bazarr | 172.20.0.9 | 6767 | Subtitles |
-| Calibre-web (CWA) | 172.20.0.10 | 8083 | Ebook library UI |
 | Agregarr | 172.20.0.11 | 7171 | Media management |
 | Tautulli | 172.20.0.12 | 8181 | Plex stats & monitoring |
 | Calibre Server | 172.20.0.18 | 8282 (GUI) / 8084 (content server) | Full Calibre app via KasmVNC |
@@ -179,9 +175,7 @@ Services start in dependency order (handled automatically by `depends_on`):
 | Agregarr | Media management |
 | Tautulli | Plex stats |
 | FlareSolverr | Cloudflare bypass |
-| LazyLibrarian | Ebook/audiobook manager |
-| Chaptarr | Ebook/audiobook manager (Readarr successor) |
-| Calibre-web (CWA) | Ebook library UI |
+| Chaptarr | Ebook/audiobook manager |
 | Calibre Server | Full Calibre app (GUI + content server) |
 
 ### `docker-compose.traefik.yml` (+ local DNS)

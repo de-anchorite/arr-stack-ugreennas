@@ -69,7 +69,6 @@ services:
       - "8989:8989"   # Sonarr
       - "7878:7878"   # Radarr
       - "8686:8686"   # Lidarr
-      - "5299:5299"   # Lazylibrarian
       - "8789:8789"   # Chaptarr
       - "9696:9696"   # Prowlarr
       - "8085:8085"   # qBittorrent
@@ -526,42 +525,6 @@ services:
     logging: *default-logging
 
   # ═══════════════════════════════════════════════════════════════════════════
-  # LazyLibrarian - Ebook & Audiobook manager. Automatically downloads books.
-  # Access: lazylibrarian.mediastack.lab | lazylibrarian.yourdomain.com | NAS_IP:5299
-  # ═══════════════════════════════════════════════════════════════════════════
-  lazylibrarian:
-    build:
-      dockerfile: Dockerfile-lazylibrarian
-      context: .
-    #image: lscr.io/linuxserver/lazylibrarian:latest
-    container_name: lazylibrarian
-    network_mode: "service:gluetun"
-    depends_on:
-      gluetun:
-        condition: service_healthy
-        restart: true
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      # - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg
-    volumes:
-      - ${CONFIG_ROOT}/lazylibrarian:/config
-      - ${MEDIA_ROOT}/books:/data/books
-      - ${DOWNLOADS_ROOT}:/data/downloads
-      - ${MEDIA_ROOT}/scripts/lazylibrarian:/home/scripts:rw
-    labels:
-      - deunhealth.restart.on.unhealthy=true
-    restart: always
-    logging: *default-logging
-    healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:5299/ && curl -sf http://www.google.com/"]
-      interval: 2m
-      timeout: 15s
-      retries: 2
-      start_period: 60s
-
-  # ═══════════════════════════════════════════════════════════════════════════
   # CHAPTARR - Ebook & Audiobook collection manager (Readarr successor).
   # Runs behind Gluetun VPN. Add to Prowlarr as a "Readarr-type" app.
   # Access: chaptarr.mediastack.lab | NAS_IP:8789
@@ -595,44 +558,8 @@ services:
       start_period: 60s
 
   # ═══════════════════════════════════════════════════════════════════════════
-  # Calibre Web - Automated - Ebook Library Web UI
-  # Access: calibre-web.mediastack.lab | calibre-web.yourdomain.com | NAS_IP:8083
-  # ═══════════════════════════════════════════════════════════════════════════
-  calibre-web:
-    image: crocodilestick/calibre-web-automated:latest
-    pull_policy: always
-    container_name: calibre-web
-    depends_on:
-      gluetun:
-        condition: service_healthy  # Needs gluetun to reach LazyLibrarian
-        restart: true
-    networks:
-      arr-stack:
-        ipv4_address: 172.20.0.10
-    ports:
-      - "8083:8083"
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_ROOT}/calibre-web:/config
-      - ${MEDIA_ROOT}/books:/calibre-library
-    labels:
-      - deunhealth.restart.on.unhealthy=true
-    restart: always
-    logging: *default-logging
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8083/"]
-      interval: 3m
-      timeout: 10s
-      retries: 2
-
-  # ═══════════════════════════════════════════════════════════════════════════
   # CALIBRE SERVER - Full Calibre desktop app via KasmVNC web GUI.
   # Manage the library here; use content server for OPDS/reading clients.
-  # NOTE: Uses a separate library path during side-by-side evaluation to avoid
-  #       conflicts with calibre-web's database. Merge libraries when switching.
   # Access: calibre-server.mediastack.lab | NAS_IP:8282
   # ═══════════════════════════════════════════════════════════════════════════
   calibre-server:

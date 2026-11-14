@@ -92,13 +92,11 @@ arr-stack network (172.20.0.0/24)
 │   (via .3)   │ ↳ Lidarr           │ 8686                 │ arr-stack.yml    │
 │   (via .3)   │ ↳ slskd            │ 5030                 │ arr-stack.yml    │
 │   (via .3)   │ ↳ Soularr          │ — (no UI)            │ arr-stack.yml    │
-│   (via .3)   │ ↳ LazyLibrarian    │ 5299                 │ arr-stack.yml    │
 │   (via .3)   │ ↳ Chaptarr         │ 8789                 │ arr-stack.yml    │
 │   (via .3)   │ ↳ FlareSolverr     │ 8191 (no UI)         │ arr-stack.yml    │
 │ 172.20.0.4   │ Plex               │ 32400                │ arr-stack.yml    │
 │ 172.20.0.8   │ Seerr              │ 5055                 │ arr-stack.yml    │
 │ 172.20.0.9   │ Bazarr             │ 6767                 │ arr-stack.yml    │
-│ 172.20.0.10  │ Calibre-web (CWA)  │ 8083                 │ arr-stack.yml    │
 │ 172.20.0.11  │ Agregarr           │ 7171                 │ arr-stack.yml    │
 │ 172.20.0.12  │ Tautulli           │ 8181                 │ arr-stack.yml    │
 │ 172.20.0.13  │ Uptime Kuma        │ 3001                 │ utilities.yml    │
