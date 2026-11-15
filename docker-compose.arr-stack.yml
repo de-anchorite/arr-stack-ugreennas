@@ -598,8 +598,8 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   # CALIBRE SERVER - Full Calibre desktop app via KasmVNC web GUI.
   # Manage the library here; use content server for OPDS/reading clients.
-  # Access: calibre-server.mediastack.lab | NAS_IP:8282 (GUI)
-  #         calibre.mediastack.lab | NAS_IP:8084 (content server web UI)
+  # Access: calibre-server.mediastack.lab | NAS_IP:8080 (GUI)
+  #         calibre.mediastack.lab | NAS_IP:8081 (content server web UI)
   # ═══════════════════════════════════════════════════════════════════════════
   calibre-server:
     image: lscr.io/linuxserver/calibre:latest
@@ -609,8 +609,8 @@ services:
       arr-stack:
         ipv4_address: 172.20.0.18
     ports:
-      - "8282:8080"  # Calibre GUI (KasmVNC)
-      - "8084:8081"  # Calibre content server (enable in Calibre prefs first)
+      - "8080:8080"  # Calibre GUI (KasmVNC)
+      - "8081:8081"  # Calibre content server (enable in Calibre prefs first)
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
