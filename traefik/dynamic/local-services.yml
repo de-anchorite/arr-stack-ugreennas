@@ -177,7 +177,7 @@ http:
     calibre-server-lan:
       loadBalancer:
         servers:
-          - url: "http://172.20.0.18:8080"
+          - url: "http://172.20.0.18:8082"
 
     calibre-lan:
       loadBalancer:

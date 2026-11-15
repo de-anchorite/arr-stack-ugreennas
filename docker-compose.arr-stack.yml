@@ -609,7 +609,7 @@ services:
       arr-stack:
         ipv4_address: 172.20.0.18
     ports:
-      - "8084:8080"  # Calibre GUI (KasmVNC)
+      - "8084:8082"  # Calibre GUI (KasmVNC)
       - "8081:8081"  # Calibre content server (enable in Calibre prefs first)
     environment:
       - PUID=${PUID}
