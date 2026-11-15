@@ -598,7 +598,8 @@ services:
   # ═══════════════════════════════════════════════════════════════════════════
   # CALIBRE SERVER - Full Calibre desktop app via KasmVNC web GUI.
   # Manage the library here; use content server for OPDS/reading clients.
-  # Access: calibre-server.mediastack.lab | NAS_IP:8282
+  # Access: calibre-server.mediastack.lab | NAS_IP:8282 (GUI)
+  #         calibre.mediastack.lab | NAS_IP:8084 (content server web UI)
   # ═══════════════════════════════════════════════════════════════════════════
   calibre-server:
     image: lscr.io/linuxserver/calibre:latest

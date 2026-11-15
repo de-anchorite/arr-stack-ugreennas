@@ -27,6 +27,7 @@
 | Tautulli | `NAS_IP:8181` | `http://tautulli.lan` | — |
 | Chaptarr | `NAS_IP:8789` | `http://chaptarr.lan` | — |
 | Calibre Server | `NAS_IP:8282` | `http://calibre-server.lan` | — |
+| Calibre (content server) | `NAS_IP:8084` | `http://calibre.lan` | — |
 | Traefik | `NAS_IP:9090` | `http://traefik.lan` | — |
 | Uptime Kuma | `NAS_IP:3001` | `http://uptime.lan` | — |
 | duc | `NAS_IP:8838` | `http://duc.lan` | — |
