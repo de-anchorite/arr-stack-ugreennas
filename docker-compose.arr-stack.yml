@@ -595,37 +595,3 @@ services:
       retries: 2
       start_period: 60s
 
-  # ═══════════════════════════════════════════════════════════════════════════
-  # CALIBRE SERVER - Full Calibre desktop app via KasmVNC web GUI.
-  # Manage the library here; use content server for OPDS/reading clients.
-  # Access: calibre-server.mediastack.lab | NAS_IP:8084 (GUI)
-  #         calibre.mediastack.lab | NAS_IP:8081 (content server web UI)
-  # ═══════════════════════════════════════════════════════════════════════════
-  calibre-server:
-    image: lscr.io/linuxserver/calibre:latest
-    pull_policy: always
-    container_name: calibre-server
-    networks:
-      arr-stack:
-        ipv4_address: 172.20.0.18
-    ports:
-      - "8282:8080"  # Calibre GUI (KasmVNC)
-      - "8084:8081"  # Calibre content server (enable in Calibre prefs first)
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_ROOT}/calibre-server:/config
-      - ${MEDIA_ROOT}/books:/books
-    labels:
-      - deunhealth.restart.on.unhealthy=true
-    restart: always
-    logging: *default-logging
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
-      interval: 3m
-      timeout: 10s
-      retries: 2
-      start_period: 30s
-

@@ -78,16 +78,6 @@ http:
       entryPoints: [web, websecure]
       service: chaptarr-lan
 
-    calibre-server-lan:
-      rule: "Host(`calibre-server.mediastack.lab`)"
-      entryPoints: [web, websecure]
-      service: calibre-server-lan
-
-    calibre-lan:
-      rule: "Host(`calibre.mediastack.lab`)"
-      entryPoints: [web, websecure]
-      service: calibre-lan
-
     # === Download Clients ===
     qbit-lan:
       rule: "Host(`qbit.mediastack.lab`)"
@@ -173,16 +163,6 @@ http:
       loadBalancer:
         servers:
           - url: "http://172.20.0.3:8789"
-
-    calibre-server-lan:
-      loadBalancer:
-        servers:
-          - url: "http://172.20.0.18:8080"
-
-    calibre-lan:
-      loadBalancer:
-        servers:
-          - url: "http://172.20.0.18:8081"
 
     bazarr-lan:
       loadBalancer:

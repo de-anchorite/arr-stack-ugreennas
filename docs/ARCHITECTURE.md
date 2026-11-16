@@ -103,7 +103,6 @@ arr-stack network (172.20.0.0/24)
 │ 172.20.0.14  │ duc                │ 8838                 │ utilities.yml    │
 │ 172.20.0.15  │ Beszel             │ 8090                 │ utilities.yml    │
 │ 172.20.0.16  │ Whoami             │ 80                   │ traefik.yml      │
-│ 172.20.0.18  │ Calibre Server     │ 8282 / 8084          │ arr-stack.yml    │
 │ 172.20.0.20  │ Cloudflared        │ — (no UI)            │ cloudflared.yml  │
 ────────────────────────────────────────────────────────────────────────────────────────
 ```
