@@ -451,6 +451,7 @@ services:
       - ${CONFIG_ROOT}/lidarr:/config
       - ${MEDIA_ROOT}/music:/data/music
       - ${DOWNLOADS_ROOT}:/data/downloads  # Same mount as qBittorrent for hardlinks
+      - ${DOWNLOADS_ROOT}:/downloads  # Same mount as slskarr
     labels:
       - deunhealth.restart.on.unhealthy=true
     restart: always
@@ -480,6 +481,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
       - SLSKD_REMOTE_CONFIGURATION=true
+      - SLSKD_REMOTE_FILE_MANAGEMENT=true
     volumes:
       - ${CONFIG_ROOT}/slskd:/app
       - ${DOWNLOADS_ROOT}/slskd:/data/downloads/slskd  # Same mount as qBittorrent for hardlinks
@@ -495,35 +497,35 @@ services:
       retries: 2
       start_period: 60s
   
-  # ═══════════════════════════════════════════════════════════════════════════
-  # SOULARR - Music P2P
-  # Access: soularr.mediastack.lab | soularr.yourdomain.com | NAS_IP:5030
-  # ═══════════════════════════════════════════════════════════════════════════
-  soularr:
-    image: mrusse08/soularr:latest
-    pull_policy: always
-    container_name: soularr
-    network_mode: "service:gluetun"
-    depends_on:
-      gluetun:
-        condition: service_healthy
-        restart: true
-      lidarr:
-        condition: service_healthy
-        restart: true
-      slskd:
-        condition: service_healthy
-        restart: true
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - SCRIPT_INTERVAL=300
-    volumes:
-      - ${CONFIG_ROOT}/soularr:/data
-      - ${DOWNLOADS_ROOT}/slskd/completed:/downloads
-    restart: always
-    logging: *default-logging
+  # # ═══════════════════════════════════════════════════════════════════════════
+  # # SOULARR - Music P2P
+  # # Access: soularr.mediastack.lab | soularr.yourdomain.com | NAS_IP:5030
+  # # ═══════════════════════════════════════════════════════════════════════════
+  # soularr:
+  #   image: mrusse08/soularr:latest
+  #   pull_policy: always
+  #   container_name: soularr
+  #   network_mode: "service:gluetun"
+  #   depends_on:
+  #     gluetun:
+  #       condition: service_healthy
+  #       restart: true
+  #     lidarr:
+  #       condition: service_healthy
+  #       restart: true
+  #     slskd:
+  #       condition: service_healthy
+  #       restart: true
+  #   environment:
+  #     - PUID=${PUID}
+  #     - PGID=${PGID}
+  #     - TZ=${TZ}
+  #     - SCRIPT_INTERVAL=300
+  #   volumes:
+  #     - ${CONFIG_ROOT}/soularr:/data
+  #     - ${DOWNLOADS_ROOT}/slskd/completed:/downloads
+  #   restart: always
+  #   logging: *default-logging
 
   # ═══════════════════════════════════════════════════════════════════════════
   # SLSKARR - Bridges Chaptarr to Soulseek via slskd.
@@ -552,15 +554,8 @@ services:
       - Slskarr__Slskd__DownloadsPath=/downloads/slskd/completed
     volumes:
       - ${CONFIG_ROOT}/slskarr:/data
-      - ${DOWNLOADS_ROOT}:/downloads
     restart: always
     logging: *default-logging
-    healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8080/"]
-      interval: 2m
-      timeout: 10s
-      retries: 2
-      start_period: 30s
 
   # ═══════════════════════════════════════════════════════════════════════════
   # CHAPTARR - Ebook & Audiobook collection manager (Readarr successor).
